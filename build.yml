@@ -1,0 +1,13 @@
+targets:
+  $default:
+    builders:
+      neat_builder:
+        enabled: true
+        
+builders:
+  neat_builder:
+    import: "package:neat/neat_builder.dart"
+    builder_factories: ["neat_builder"]
+    build_extensions: {".dart": [".gen"]}
+    auto_apply: dependents
+    build_to: source
