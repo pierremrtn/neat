@@ -31,12 +31,11 @@ class SpaceWidgetGenerator {
     List<double> list,
     NeatAnotation meta,
   ) {
-    final base = Utils.varNameToClassBaseFormat(varName);
     return list
         .asMap()
         .entries
         .map((MapEntry<int, double> entry) => _generateCode(
-              '$base${entry.key + 1}',
+              'Space${entry.key + 1}',
               entry.value,
             ))
         .toList()
@@ -48,10 +47,9 @@ class SpaceWidgetGenerator {
     Map<String, double> map,
     NeatAnotation meta,
   ) {
-    final base = Utils.varNameToClassBaseFormat(varName);
     return map.entries
         .map((MapEntry<String, double> entry) => _generateCode(
-              '$base${Utils.capitalizeFirstChar(entry.key)}',
+              'Space${Utils.capitalizeFirstChar(entry.key)}',
               entry.value,
             ))
         .toList()
