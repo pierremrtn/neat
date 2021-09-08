@@ -9,43 +9,42 @@ TODO: better readme
 Widgets that wrap text into a `Text` widget with according style.
 
 ```
-    class Headline1 extends StatelessWidget {
-      const Headline1(this.text);
+class Headline1 extends StatelessWidget {
+  const Headline1(this.text);
+  
+  final String text;
 
-      final String text;
-
-      @override
-      Widget build(BuildContext context) {
-        return Text(text, style: Theme.of(context).textTheme.headline1);
-      }
-    }
+  @override
+  Widget build(BuildContext context) {
+    return Text(text, style: Theme.of(context).textTheme.headline1);
+  }
+}
 ```
 
 Widgets follows `ThemeData` text styles typographies.
 There is one widget for each material style exepted `button`.
 
 ```
-    //Headldines
-    Headline1("H1"),
-    Headline2("H2"),
-    Headline3("H3"),
-    Headline4("H4"),
-    Headline5("H5"),
-    Headline6("H6"),
+//Headldines
+Headline1("H1"),
+Headline2("H2"),
+Headline3("H3"),
+Headline4("H4"),
+Headline5("H5"),
+Headline6("H6"),
 
-    //Subtitle
-    Subtitle1("Subtitle1"),
-    Subtitle2("Subtitle2"),
+//Subtitle
+Subtitle1("Subtitle1"),
+Subtitle2("Subtitle2"),
 
-    //BodyText
-    BodyText1("Body 1"),
-    BodyText2("Body 2"),
+//BodyText
+BodyText1("Body 1"),
+BodyText2("Body 2"),
 
-    //Caption
-    Caption("caption"),
-
-    //Overline
-    Overline("overline"),
+//Caption
+Caption("caption"),
+//Overline
+Overline("overline"),
 ```
 
 ### Generated widget
@@ -75,32 +74,33 @@ class Dim {
 then run build_runner `flutter pub run build_runner build --delete-conflicting-outputs`.
 It will generate a `.nt.dart` file containeing generated `Space` widgets.
 ```
-    class SpaceSmall extends StatelessWidget {
-    const SpaceSmall()
-        : width = 8,
-          height = 8;
+class SpaceSmall extends StatelessWidget {
+  const SpaceSmall()
+      : width = 8,
+        height = 8;
 
-    const SpaceSmall.w()
-        : width = 8,
-          height = 0;
+  const SpaceSmall.w()
+      : width = 8,
+        height = 0;
 
-    const SpaceSmall.h()
-        : width = 0,
-          height = 8;
+  const SpaceSmall.h()
+      : width = 0,
+        height = 8;
 
-    final double width;
-    final double height;
+  final double width;
+  final double height;
 
-    @override
-    Widget build(BuildContext context) {
-      return SizedBox(width: width, height: height);
-    }
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(width: width, height: height);
+  }
+}
 ```
 You can then import `dims.nt.dart` to use them.
 ```    
-    SpaceSmall(), //SizedBox(width: 8, height: 8)    
-    SpaceMedium.w(), //SizedBox(width: 16, height: 0)
-    SpaceBig.h(), //SizedBox(width: 0, height: 32)
+SpaceSmall(), //SizedBox(width: 8, height: 8)    
+SpaceMedium.w(), //SizedBox(width: 16, height: 0)
+SpaceBig.h(), //SizedBox(width: 0, height: 32)
 ```
 You can aslo use a list to generate `Space`s. Names will be suffixed with space's index.
 ```
