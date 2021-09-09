@@ -9,8 +9,7 @@ class SpaceWidgetGenerator {
     VariableElement element,
     NeatAnotation defaultConfig,
   ) {
-    if (element.isPublic &&
-        element.isStatic &&
+    if (element.isPrivate &&
         element.isConst &&
         (element.type.isDartCoreList || element.type.isDartCoreMap)) {
       //TODO: config overriding
@@ -23,7 +22,7 @@ class SpaceWidgetGenerator {
         return _generateFromMap(element.displayName, map, defaultConfig);
       }
     }
-    throw ("Fields anotated with nt_space must be public static const List<double> or public static const Map<String, double>");
+    throw ("Fields anotated with nt_space must be private const List<double> or private const Map<String, double>");
   }
 
   static String _generateFromList(
