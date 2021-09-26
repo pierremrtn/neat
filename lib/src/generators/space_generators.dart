@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
+import 'package:collection/collection.dart';
 import 'package:neat/src/anotations.dart';
 
 import 'utils.dart';
@@ -31,11 +32,9 @@ class SpaceWidgetGenerator {
     NeatAnotation meta,
   ) {
     return list
-        .asMap()
-        .entries
-        .map((MapEntry<int, double> entry) => _generateCode(
-              'Space${entry.key + 1}',
-              entry.value,
+        .mapIndexed((index, value) => _generateCode(
+              'Space${index + 1}',
+              value,
             ))
         .toList()
         .join("\n");
