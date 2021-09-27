@@ -1,4 +1,4 @@
 library neat;
 
-export 'src/anotations.dart';
 export 'src/text.dart';
+export 'src/theme_accessors.dart';
