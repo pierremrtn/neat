@@ -7,6 +7,8 @@ import 'dart:core';
 import 'src/anotations.dart';
 import 'src/generators/space_generators.dart';
 
+export 'src/anotations.dart';
+
 Builder neatGenerator(BuilderOptions options) {
   final formater = DartFormatter();
   return PartBuilder(
