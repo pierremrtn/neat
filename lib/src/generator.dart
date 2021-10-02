@@ -4,10 +4,8 @@ import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'dart:core';
 
-import 'src/anotations.dart';
-import 'src/generators/space_generators.dart';
-
-export 'src/anotations.dart';
+import 'package:neat/anotations.dart';
+import 'generators/space_generators.dart';
 
 Builder neatGenerator(BuilderOptions options) {
   final formater = DartFormatter();
