@@ -6,7 +6,7 @@ targets:
         
 builders:
   neat_builder:
-    import: "package:neat/neat_generator.dart"
+    import: "package:neat/generator.dart"
     builder_factories: ["neatGenerator"]
     build_extensions: {".dart": [".nt.dart"]}
     auto_apply: dependents
