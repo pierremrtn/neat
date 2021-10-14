@@ -17,7 +17,6 @@ extension NeatText on BuildContext {
     String? semanticsLabel,
     TextWidthBasis? textWidthBasis,
     TextHeightBehavior? textHeightBehavior,
-    Color? color,
     FontWeight? weight,
   }) =>
       Text(
