@@ -65,27 +65,54 @@ class SpaceWidgetGenerator {
         ..constructors.addAll([
           Constructor(
             (c) => c
+              ..optionalParameters.addAll([
+                Parameter(
+                  (p) => p
+                    ..name = "key"
+                    ..named = true
+                    ..type = Reference("Key?"),
+                ),
+              ])
               ..initializers.addAll([
                 Code("width = ${space.toStringAsFixed(0)}"),
-                Code("height = ${space.toStringAsFixed(0)}")
+                Code("height = ${space.toStringAsFixed(0)}"),
+                Code("super(key: key)"),
               ])
               ..constant = true,
           ),
           Constructor(
             (c) => c
               ..name = "w"
+              ..optionalParameters.addAll([
+                Parameter(
+                  (p) => p
+                    ..name = "key"
+                    ..named = true
+                    ..type = Reference("Key?"),
+                ),
+              ])
               ..initializers.addAll([
                 Code("width = ${space.toStringAsFixed(0)}"),
                 Code("height = 0"),
+                Code("super(key: key)"),
               ])
               ..constant = true,
           ),
           Constructor(
             (c) => c
               ..name = "h"
+              ..optionalParameters.addAll([
+                Parameter(
+                  (p) => p
+                    ..name = "key"
+                    ..named = true
+                    ..type = Reference("Key?"),
+                ),
+              ])
               ..initializers.addAll([
                 Code("width = 0"),
                 Code("height = ${space.toStringAsFixed(0)}"),
+                Code("super(key: key)"),
               ])
               ..constant = true,
           ),
