@@ -1,63 +1,36 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
-import 'package:collection/collection.dart';
-import 'package:neat/anotations.dart';
+import 'package:source_gen/source_gen.dart';
+import 'package:neat/generator/generator_options.dart';
+import 'class_const_field_parser.dart';
 
-import 'utils.dart';
+//TODO: better space generator
+//
+//class Space1 extends SizedBox {
+//  const Space1({Key? key}) : super(height: 1, width: 1, key: key);
+//  const Space1.w({Key? key}) : super(height: 0, width: 1, key: key);
+//  const Space1.h({Key? key}) : super(height: 1, width: 0, key: key);
+//}
 
-class SpaceWidgetGenerator {
-  static String tryGenerate(
-    VariableElement element,
-    NeatAnotation defaultConfig,
+class SpaceWidgetsGenerator extends GeneratorForAnnotation<NeatSpaces>
+    with ClassConstFieldParser {
+  @override
+  String generateForAnnotatedElement(
+    Element element,
+    ConstantReader annotation,
+    __,
   ) {
-    if (element.isPrivate &&
-        element.isConst &&
-        (element.type.isDartCoreList || element.type.isDartCoreMap)) {
-      //TODO: config overriding
-
-      if (element.type.isDartCoreList) {
-        final list = Utils.tryConvertToListDouble(element);
-        return _generateFromList(element.displayName, list, defaultConfig);
-      } else if (element.type.isDartCoreMap) {
-        final map = Utils.tryConvertToMapStringDouble(element);
-        return _generateFromMap(element.displayName, map, defaultConfig);
-      }
-    }
-    throw ("Fields anotated with nt_space must be private const List<double> or private const Map<String, double>");
+    //TODO: parse config
+    return parseElementAsClass(element);
   }
 
-  static String _generateFromList(
-    String varName,
-    List<double> list,
-    NeatAnotation meta,
-  ) {
-    return list
-        .mapIndexed((index, value) => _generateCode(
-              'Space${index + 1}',
-              value,
-            ))
-        .toList()
-        .join("\n");
-  }
-
-  static String _generateFromMap(
-    String varName,
-    Map<String, double> map,
-    NeatAnotation meta,
-  ) {
-    return map.entries
-        .map((MapEntry<String, double> entry) => _generateCode(
-              'Space${Utils.capitalizeFirstChar(entry.key)}',
-              entry.value,
-            ))
-        .toList()
-        .join("\n");
-  }
-
-  static String _generateCode(
-    String className,
+  @override
+  String? generateForDouble(
+    GeneratorOptions options,
+    String field,
     double space,
   ) {
+    final className = options.generateWidgetName("Space", field);
     final widgetCode = Class(
       (b) => b
         ..name = className
