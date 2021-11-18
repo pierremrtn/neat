@@ -1,31 +1,53 @@
-import 'package:analyzer/dart/element/element.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:source_gen/source_gen.dart';
-import 'package:neat/generator/generator_options.dart';
-import 'class_const_field_parser.dart';
+import 'package:analyzer/dart/element/element.dart';
+import 'package:neat/neat_generator/class_literals_visitor.dart';
+import 'package:neat/neat_generator/generator_for_class_annotation.dart';
 
-class SpaceWidgetsGenerator extends GeneratorForAnnotation<NeatSpaces>
-    with ClassConstFieldParser {
+class SpaceWidgetsGeneratorAnnotation
+    extends GeneratorForClassLiteralsAnnotation<double> {
+  const SpaceWidgetsGeneratorAnnotation({
+    String? classRadical = "Space",
+    String? generateForFieldStartingWith,
+    bool removePrefix = false,
+    bool radicalFirst = true,
+    bool avoidPrefixRepetition = true,
+  }) : super(
+          classRadical: classRadical,
+          generateForFieldStartingWith: generateForFieldStartingWith,
+          removePrefix: removePrefix,
+          radicalFirst: radicalFirst,
+          avoidPrefixRepetition: avoidPrefixRepetition,
+        );
+
+  SpaceWidgetsGeneratorAnnotation.fromConstantReader(
+    ConstantReader reader,
+  ) : super.fromConstantReader(reader);
+}
+
+class SpaceWidgetsGenerator
+    extends GeneratorForAnnotation<SpaceWidgetsGeneratorAnnotation> {
   @override
   String generateForAnnotatedElement(
     Element element,
     ConstantReader annotation,
     _,
   ) {
-    return parseElementAsClass(element);
+    final meta = SpaceWidgetsGeneratorAnnotation.fromConstantReader(annotation);
+
+    final visitor = ClassLiteralsVisitor<double>(
+      filter: meta.filter(),
+      nameExtractor: meta.extractor(),
+      generator: generateSpaceWidget,
+    );
+    return visitor.visit(element as ClassElement).join('\n');
   }
 
-  @override
-  String? generateForDouble(
-    GeneratorOptions options,
-    String field,
-    double space,
-  ) {
-    final className = options.generateWidgetName("Space", field);
+  static String generateSpaceWidget(String widgetName, double space) {
     final s = space.toStringAsFixed(0);
     final widgetCode = Class(
       (b) => b
-        ..name = className
+        ..name = widgetName
         ..extend = refer('SizedBox')
         ..constructors.addAll([
           Constructor(
@@ -78,6 +100,10 @@ class SpaceWidgetsGenerator extends GeneratorForAnnotation<NeatSpaces>
         ]),
     );
     final emitter = DartEmitter();
-    return '${widgetCode.accept(emitter)}';
+    return widgetCode.accept(emitter).toString();
   }
+
+  @override
+  String generateWidget(String widgetName, double space) =>
+      generateSpaceWidget(widgetName, space);
 }

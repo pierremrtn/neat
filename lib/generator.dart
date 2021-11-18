@@ -1,8 +1,14 @@
-import 'package:neat/generator/generator_options.dart';
+import 'package:neat/neat_generator/generators/padding_classes_generator.dart'
+    show PaddingClassesGeneratorAnnotation;
+import 'package:neat/neat_generator/generators/space_widgets_generator.dart'
+    show SpaceWidgetsGeneratorAnnotation;
 
 export 'package:flutter/widgets.dart';
 
+typedef GeneratePaddings = PaddingClassesGeneratorAnnotation;
+typedef GenerateSpaces = SpaceWidgetsGeneratorAnnotation;
+
 class Neat {
-  // static const option = NeatConfig();
-  static const spaces = NeatSpaces();
+  static const generateSpaces = SpaceWidgetsGeneratorAnnotation();
+  static const generatePaddings = PaddingClassesGeneratorAnnotation();
 }

@@ -2,6 +2,8 @@ import 'package:build/build.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:source_gen/source_gen.dart';
 import 'dart:core';
+
+import 'generators/padding_classes_generator.dart';
 import 'generators/space_widgets_generator.dart';
 
 //TODO: padding extensions ?
@@ -24,6 +26,7 @@ Builder neatGenerator(BuilderOptions options) {
   return PartBuilder(
     [
       SpaceWidgetsGenerator(),
+      PaddingClassesGenerator(),
     ],
     ".nt.dart",
     formatOutput: formater.format,
