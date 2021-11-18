@@ -12,6 +12,7 @@ class PaddingClassesGeneratorAnnotation
     bool removePrefix = false,
     bool radicalFirst = true,
     bool avoidPrefixRepetition = true,
+    this.generateBinaryFlagConstructor = true,
   }) : super(
           classRadical: classRadical,
           generateForFieldStartingWith: generateForFieldStartingWith,
@@ -20,13 +21,19 @@ class PaddingClassesGeneratorAnnotation
           avoidPrefixRepetition: avoidPrefixRepetition,
         );
 
+  final bool generateBinaryFlagConstructor;
+
   PaddingClassesGeneratorAnnotation.fromConstantReader(
     ConstantReader reader,
-  ) : super.fromConstantReader(reader);
+  )   : generateBinaryFlagConstructor =
+            reader.read("generateBinaryFlagConstructor").boolValue,
+        super.fromConstantReader(reader);
 }
 
 class PaddingClassesGenerator
     extends GeneratorForAnnotation<PaddingClassesGeneratorAnnotation> {
+  bool generateBinaryFlagConstructor = true;
+
   @override
   String generateForAnnotatedElement(
     Element element,
@@ -36,17 +43,24 @@ class PaddingClassesGenerator
     final meta =
         PaddingClassesGeneratorAnnotation.fromConstantReader(annotation);
 
+    generateBinaryFlagConstructor = meta.generateBinaryFlagConstructor;
+
     final visitor = ClassLiteralsVisitor<double>(
       filter: meta.filter(),
       nameExtractor: meta.extractor(),
       generator: generatePaddingClass,
     );
 
-    return [_generateHeader(), ...visitor.visit(element as ClassElement)]
-        .join('\n');
+    if (generateBinaryFlagConstructor) {
+      return [
+        _generateBinaryFlags(),
+        ...visitor.visit(element as ClassElement),
+      ].join('\n');
+    }
+    return visitor.visit(element as ClassElement).join('\n');
   }
 
-  static String generatePaddingClass(
+  String generatePaddingClass(
     String widgetName,
     double value,
   ) {
@@ -56,27 +70,28 @@ class PaddingClassesGenerator
         ..name = widgetName
         ..extend = refer('EdgeInsets')
         ..constructors.addAll([
-          Constructor(
-            (c) => c
-              ..optionalParameters.add(
-                Parameter(
-                  (p) => p
-                    ..name = "padding"
-                    ..type = Reference("int")
-                    ..defaultTo = Code("0"),
-                ),
-              )
-              ..initializers.add(
-                Code(
-                  """super.only(
+          if (generateBinaryFlagConstructor)
+            Constructor(
+              (c) => c
+                ..optionalParameters.add(
+                  Parameter(
+                    (p) => p
+                      ..name = "padding"
+                      ..type = Reference("int")
+                      ..defaultTo = Code("0"),
+                  ),
+                )
+                ..initializers.add(
+                  Code(
+                    """super.only(
   left: padding & top == 1 ? $padding : 0,
   right: padding & right == 1 ? $padding : 0,
   top: padding & top == 1 ? $padding : 0,
   bottom: padding & bottom == 1 ? $padding : 0,)""",
-                ),
-              )
-              ..constant = true,
-          ),
+                  ),
+                )
+                ..constant = true,
+            ),
           Constructor(
             (c) => c
               ..name = "all"
@@ -178,7 +193,7 @@ class PaddingClassesGenerator
     return widgetCode.accept(emitter).toString();
   }
 
-  static String _generateHeader() => """
+  static String _generateBinaryFlags() => """
   const right = 0x1000;
   const left = 0x0100;
   const top = 0x0010;
