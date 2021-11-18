@@ -1,5 +1,6 @@
 import 'package:build/build.dart';
 import 'package:dart_style/dart_style.dart';
+import 'package:neat/neat_generator/generators/grouped_generator.dart';
 import 'package:source_gen/source_gen.dart';
 import 'dart:core';
 
@@ -25,6 +26,7 @@ Builder neatGenerator(BuilderOptions options) {
 
   return PartBuilder(
     [
+      GroupedGenerator(),
       SpaceWidgetsGenerator(),
       PaddingClassesGenerator(),
     ],
