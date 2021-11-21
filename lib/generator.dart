@@ -12,6 +12,10 @@ typedef NeatGenerator = GroupedGeneratorAnnotation;
 
 class Neat {
   static const generate = GroupedGeneratorAnnotation();
-  static const generateSpace = SpaceWidgetsGeneratorAnnotation();
-  static const generatePadding = PaddingClassesGeneratorAnnotation();
+  static const generateSpace = SpaceWidgetsGeneratorAnnotation(
+    generateForFieldStartingWith: null,
+  );
+  static const generatePadding = PaddingClassesGeneratorAnnotation(
+    generateForFieldStartingWith: null,
+  );
 }

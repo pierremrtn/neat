@@ -8,7 +8,7 @@ class PaddingClassesGeneratorAnnotation
     extends GeneratorForClassLiteralsAnnotation<double> {
   const PaddingClassesGeneratorAnnotation({
     String? classRadical = "Padding",
-    String? generateForFieldStartingWith,
+    String? generateForFieldStartingWith = "padding",
     bool removePrefix = false,
     bool radicalFirst = true,
     bool avoidPrefixRepetition = true,

@@ -6,12 +6,13 @@ import 'package:analyzer/dart/element/element.dart';
 
 class GroupedGeneratorAnnotation {
   const GroupedGeneratorAnnotation({
-    this.padding = const PaddingClassesGeneratorAnnotation(
-      generateForFieldStartingWith: "padding",
-    ),
-    this.space = const SpaceWidgetsGeneratorAnnotation(
-      generateForFieldStartingWith: "space",
-    ),
+    ///padding helpers generator options
+    ///if null, padding helpers will not be generated
+    this.padding = const PaddingClassesGeneratorAnnotation(),
+
+    ///space widgets generator options
+    ///if null, space widgets will not be generated
+    this.space = const SpaceWidgetsGeneratorAnnotation(),
   });
 
   final PaddingClassesGeneratorAnnotation? padding;

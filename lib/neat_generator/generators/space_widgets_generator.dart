@@ -8,7 +8,7 @@ class SpaceWidgetsGeneratorAnnotation
     extends GeneratorForClassLiteralsAnnotation<double> {
   const SpaceWidgetsGeneratorAnnotation({
     String? classRadical = "Space",
-    String? generateForFieldStartingWith,
+    String? generateForFieldStartingWith = "space",
     bool removePrefix = false,
     bool radicalFirst = true,
     bool avoidPrefixRepetition = true,
@@ -102,8 +102,4 @@ class SpaceWidgetsGenerator
     final emitter = DartEmitter();
     return widgetCode.accept(emitter).toString();
   }
-
-  @override
-  String generateWidget(String widgetName, double space) =>
-      generateSpaceWidget(widgetName, space);
 }
