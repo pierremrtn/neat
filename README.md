@@ -56,7 +56,7 @@ dev_dependencies:
 # Features
 
 Neat has to distinct parts:
-* A collection of opinionated helpers and widgets, that you can import with `import 'package:neat/neat.dart';`
+* A collection of helpers and widgets, that you can import with `import 'package:neat/neat.dart';`
 
 * A code generator, that you can import with `import 'package:neat/generator.dart';`
 
@@ -79,7 +79,7 @@ Text(
       ?.copyWith(color: Colors.red),
 ),
 ```
-Neat introduce a collection of extension on `BuildContext` for this purpose:
+Neat introduce a collection of extension on `BuildContext` that simplify the creation of headlines and other types of text defined in material textTheme:
 ```
 import 'package:neat/neat.dart';
 
@@ -109,7 +109,7 @@ context.overline("overline"),
 context.buttonText("button"),
 ```
 
-methods have same properties than regular Text widget
+All methods have same properties than regular Text widget:
 ```
 context.headline1(
     Headline1,
@@ -131,7 +131,6 @@ context.headline1(
 ```
 
 ## Theme accessors
-
 Without Neat, you access ThemeData, textTheme and colorScheme in the following way:
 ```
 Theme.of(context);
@@ -148,7 +147,7 @@ context.colorScheme;
 ```
 
 ## Code Generator
-When you want to keep your spacing and padding consistent across your app, you often end up with a Dimension class holding all your variables at the same place, like so:
+When you want to keep your spacing and padding consistent across your app, you often end up with a Dimension class holding all your variables at the same place, like this:
 ```
 class Dimensions {
     static double paddingSmall = 8;
@@ -160,7 +159,7 @@ class Dimensions {
     static double spaceBig = 34;
 }
 ```
-Then you use theses value in your app like so:
+Then you use theses value in your app:
 ```
 const SizedBox(height: Dimensions.spaceSmall),
 Padding(
@@ -173,8 +172,11 @@ Padding(
 ```
 Neat helps you pushing it further by generating specialized helpers and widgets based on your data class, without wasting time coding it yourself:
 ```
+//Generated Space widget, inherit from SizedBox class,
 const SpaceSmall.h(),
+
 Padding(
+  //Generated Padding helper, inherit form EdgeInsets class
   padding: PaddingMedium(top | left),
   child: ...,
 )
@@ -184,10 +186,10 @@ The generator is flexible and let you configure generated widget names, filters 
 ### basic usage
 First, make sure you have installed the build_runner package.
 
-Then, create a Dimensions class and annotate it with `@Neat.generate`. With this annotation, Neat generator will generate both spacing widgets and padding helpers at once.
+Then, create a Dimensions class and annotate it with `@Neat.generate`. Neat generator will generate both spacing widgets and padding helpers for classes annotated with it.
+
 **dimensions.dart**
 ```
-// dimensions.dart
 import 'package:neat/generator.dart';
 
 part 'dimensions.nt.dart';
@@ -203,9 +205,9 @@ class Dimensions {
   static const double paddingBig = 55;
 }
 ```
-NeatGenerator let you specify some options to control the generator behavior. To set generator config, use `@NeatGenerator(yourOptions)`instead of `@Neat.generate` annotation.
+NeatGenerator let you specify some options to control the generator behavior. To set generator config, use `@NeatGenerator(your_options)`instead of `@Neat.generate` annotation.
 ```
-@NeatGenerator({
+@NeatGenerator(
   //padding helpers generator options
   //if null, padding helpers will not be generated
   padding: GeneratePadding(
@@ -217,7 +219,7 @@ NeatGenerator let you specify some options to control the generator behavior. To
   space: GenerateSpace(
     //put space generator options here
   ),
-});
+)
 class Dimensions {
   ...
 }
@@ -267,15 +269,23 @@ analyzer:
 ```
 
 ### Space Widgets
-Space Widget represent a blank space in your app. This widget inherit from SizedBox and define 3 constructors with pre-filled height and width values, based on data in your DataClass.
+Space Widget represent a blank space in your app. This widget inherit from SizedBox and define 3 constructors with pre-filled height and width values, based on data in your value class.
+Space widgets are generated from `static const double` fields of a value class annotated with one of the Neat generator's annotations.
 
 If you have a global dimensions class for both padding and space generation you can use `@Neat.generate` annotation to generate space widgets.
-By default, it will use all field starting with "space" for generation. You can specify Space Generator options with the annotation `@NeatGenerator(space: yourOptions)`.
+By default, it will use all fields starting with "space" for generation. You can specify Space Generator options with the annotation `@NeatGenerator`. See <a href="#Space widget generator options">Space widget generator options</a> for more information about available options.
+```
+@NeatGenerator(
+  space: GenerateSpace(yourOptions)
+)
+class Dimensions {
+  ...
+}
+```
 
-If you have a separated class for space values, you can use `@Neat.generateSpace` annotation. This annotation will use all fields of the class to generate space widgets. You can customize it's behavior using `@GenerateSpace(options)`annotation (see below).
+If you have a separated class for space values, you can use `@Neat.generateSpace` annotation. By default this annotation will use all fields of the class to generate space widgets. You can customize it's behavior using `@GenerateSpace(options)`annotation.
 
 #### Example
-
 **dimensions.dart**
 ```
 import 'package:neat/generator.dart';
@@ -289,7 +299,6 @@ class Dimensions {
   static const double spaceBig = 55;
 }
 ```
-
 **main.dart**
 ```
 import 'dimensions.dart';
@@ -331,7 +340,7 @@ class SpaceSmall extends SizedBox {
 The base name of widget that will be generated.
 
 **generateForFieldStartingWith: String? = "space"**<br/>
-Filters on which field the generator should used to generated space widget. If null, the generator will run on every fields of the class.
+If not-null, generator will only generate Space widget for field where `fieldName.startsWith(generateForFieldStartingWith) == true`.If null, every fields of the class will be used to generate a corresponding widget.
 
 **removePrefix: bool = false**<br/>
 Remove prefix specified by generateForFieldStartingWith parameter form fieldName.
@@ -340,14 +349,24 @@ Remove prefix specified by generateForFieldStartingWith parameter form fieldName
 Specify if classRadical should be printed before or after the fieldName 
 
 **avoidPrefixRepetition: bool = true**<br/>
-If true, remove the beginning of field name if its match classRadical parameter.
+If true, remove the beginning of field name if its match `classRadical`.
 
 ### Padding helpers
-PaddingHelpers class inherit from EdgeInsets class and define new constructors with pre-filled values based on data in your Dimension class.
-If you have a global dimensions class for both padding and space generation you can use `@Neat.generate` annotation to generate padding helpers.
-By default, it will use all field starting with "padding" for generation. You can specify Padding Generator option with the annotation `@NeatGenerator(padding: yourOptions)`.
+PaddingHelpers inherit from EdgeInsets class and define new constructors with pre-filled values based on data in your value class.
+PaddingHelpers are generated from `static const double` fields of a value class annotated with one of the Neat generator's annotations.
 
-If you have a separated class for padding values, you can use `@Neat.generatePadding` annotation. This annotation will use all fields of the class to generate padding. You can customize it's behavior using `@GeneratePadding(options)`annotation (see below).
+If you have a global dimensions class for both padding and space generation you can use `@Neat.generate` annotation to generate padding helpers.
+By default, it will use all fields starting with "padding" for generation. You can specify Padding Generator options with the annotation `@NeatGenerator`.
+See <a href="#Space widget generator options">Space widget generator options</a> for more information about available options.
+```
+@NeatGenerator(
+  padding: GeneratePadding(yourOptions)
+)
+class Dimensions {
+  ...
+}
+```
+If you have a separated class for padding values, you can use `@Neat.generatePadding` annotation. By default this annotation will use all fields of the class to generate padding. You can customize it's behavior using `@GeneratePadding(options)`annotation (see below).
 
 #### Example
 **paddings.dart**
@@ -433,20 +452,20 @@ class PaddingSmall extends EdgeInsets {
 ```
 
 #### Padding generator option
-**classRadical: String? = "Padding"**<br/>
-The base name of Helpers class that will be generated.
+**classRadical: String? = "Space"**<br/>
+The base name of widget that will be generated.
 
-**generateForFieldStartingWith: String? = "padding"**<br/>
-Filters on which field the generator should used to generated padding helpers. If null, the generator will run on every fields of the class.
+**generateForFieldStartingWith: String? = "space"**<br/>
+If not-null, generator will only generate Space widget for field where `fieldName.startsWith(generateForFieldStartingWith) == true`.If null, every fields of the class will be used to generate a corresponding widget.
 
 **removePrefix: bool = false**<br/>
-Remove prefix specified by generateForFieldStartingWith parameter.
+Remove prefix specified by generateForFieldStartingWith parameter form fieldName.
 
 **radicalFirst: bool = true**<br/>
 Specify if classRadical should be printed before or after the fieldName 
 
 **avoidPrefixRepetition: bool = true**<br/>
-If true, remove the beginning of field name if its match classRadical parameter.
+If true, remove the beginning of field name if its match `classRadical`.
 
 **generateBinaryFlagConstructor: bool = true**<br/>
 If true, generate top, left, right and bottom binary flags to enable the syntax `PaddingSmall(top | left | right | bottom)`
@@ -454,12 +473,10 @@ If true, generate top, left, right and bottom binary flags to enable the syntax 
 
 # Contributions
 **Wants to contribute ?** I'm happy to discuss about what feature to add next !
-This package have been recently published, actually i'm focusing on:
 
- * improving the readme/documentation
- * find and correct bugs
- * Test coverage
- * better fieldName parse 
-
-Any PR are welcomes !
+I've published this package recently, help in one of the following area is appreciated:
+ * **Improving the README**: English is not my native language, any helps to improve the quality of the readme are welcome !
+ * **Test coverage**: Add some tests, especially for the fieldFilter / widgetNameExtractor is a top priority.
+ * **Improve the architecture/ code cleanliness**: Feel free to propose ameliorations, but i reserve myself the right to accept or reject them.
+ * **Improve the code generator configuration**: Make code generators more flexible by adding more generation options. Parser is actually pretty basic and it probably need a refacto.
 
