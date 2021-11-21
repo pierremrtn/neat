@@ -3,6 +3,7 @@ Welcome to Neat, a utility package that helps doing cleaner Flutter code.
 
 If you like Neat, don't forget to leave a ⭐️ on the repo and share the package !
 
+![example screenshot](doc/neat_dimensions_class_example.png)
 ![example screenshot](doc/neat_example.png)
 
 # Motivation
