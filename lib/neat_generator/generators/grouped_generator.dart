@@ -8,14 +8,14 @@ class GroupedGeneratorAnnotation {
   const GroupedGeneratorAnnotation({
     ///padding helpers generator options
     ///if null, padding helpers will not be generated
-    this.padding = const PaddingClassesGeneratorAnnotation(),
+    this.padding = const PaddingHelpersGeneratorAnnotation(),
 
     ///space widgets generator options
     ///if null, space widgets will not be generated
     this.space = const SpaceWidgetsGeneratorAnnotation(),
   });
 
-  final PaddingClassesGeneratorAnnotation? padding;
+  final PaddingHelpersGeneratorAnnotation? padding;
   final SpaceWidgetsGeneratorAnnotation? space;
 }
 
@@ -32,7 +32,7 @@ class GroupedGenerator
     //padding
     final paddingAnnotation = annotation.read("padding");
     if (!paddingAnnotation.isNull) {
-      final paddingGen = PaddingClassesGenerator();
+      final paddingGen = PaddingHelpersGenerator();
       parts.add(
         paddingGen.generateForAnnotatedElement(
           element,

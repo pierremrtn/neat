@@ -4,9 +4,9 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:neat/neat_generator/class_literals_visitor.dart';
 import 'package:neat/neat_generator/generator_for_class_annotation.dart';
 
-class PaddingClassesGeneratorAnnotation
+class PaddingHelpersGeneratorAnnotation
     extends GeneratorForClassLiteralsAnnotation<double> {
-  const PaddingClassesGeneratorAnnotation({
+  const PaddingHelpersGeneratorAnnotation({
     String? classRadical = "Padding",
     String? generateForFieldStartingWith = "padding",
     bool removePrefix = false,
@@ -23,15 +23,15 @@ class PaddingClassesGeneratorAnnotation
 
   final bool generateBinaryFlagConstructor;
 
-  PaddingClassesGeneratorAnnotation.fromConstantReader(
+  PaddingHelpersGeneratorAnnotation.fromConstantReader(
     ConstantReader reader,
   )   : generateBinaryFlagConstructor =
             reader.read("generateBinaryFlagConstructor").boolValue,
         super.fromConstantReader(reader);
 }
 
-class PaddingClassesGenerator
-    extends GeneratorForAnnotation<PaddingClassesGeneratorAnnotation> {
+class PaddingHelpersGenerator
+    extends GeneratorForAnnotation<PaddingHelpersGeneratorAnnotation> {
   bool generateBinaryFlagConstructor = true;
 
   @override
@@ -41,7 +41,7 @@ class PaddingClassesGenerator
     _,
   ) {
     final meta =
-        PaddingClassesGeneratorAnnotation.fromConstantReader(annotation);
+        PaddingHelpersGeneratorAnnotation.fromConstantReader(annotation);
 
     generateBinaryFlagConstructor = meta.generateBinaryFlagConstructor;
 
