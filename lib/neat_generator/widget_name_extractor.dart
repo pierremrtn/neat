@@ -28,7 +28,7 @@ class WidgetNameExtractor {
     }
 
     if (field.isNotEmpty) {
-      field = field[0].toUpperCase() + field.substring(1).toLowerCase();
+      field = field[0].toUpperCase() + field.substring(1);
     }
 
     final radical = classRadical ?? "";
