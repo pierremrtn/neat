@@ -59,14 +59,20 @@ Container(
 
 # Summary
 
-//TODO: finish summary
-
-* <a href="#installation">Installation</a>
+* <a href="#install">Installation</a>
+* <a href="#features">Features</a>
 * <a href="#text-helpers">Text helpers</a>
 * <a href="#theme-accessors">Theme accessors</a>
-* <a href="#generated-helpers">Neat generator</a>
-  * <a href="#space-widgets">Space widgets</a> 
-  * <a href="#padding-helpers">Padding helpers</a> 
+* <a href="#code-generator">Neat generator</a>
+  * <a href="#code-generator/basic-usage">Basic usage</a>
+  * <a href="#code-generator/ignore-lint-warnings-on-generated-files">Ignore lint warnings on generated files</a>
+  * <a href="#space-widgets">Space widgets</a>
+    * <a href="#space-widgets/generated-constructors">Generated constructors</a>
+    * <a href="#space-widgets/example">Example</a>
+  * <a href="#padding-helpers">Padding helpers</a>
+    * <a href="#padding-helpers/generated-constructors">Generated Constructors</a>
+    * <a href="#padding-helpers/example">Example</a>
+* <a href="#contributions">Contributions</a>
 
 
 # How to use
@@ -183,7 +189,7 @@ context.textTheme;
 context.colorScheme;
 ```
 
-## Code Generator
+## Neat Generator
 When you want to keep your spacing and padding consistent across your app, you often end up with a Dimension class holding all your variables at the same place, like this:
 ```dart
 class Dimensions {
@@ -382,7 +388,6 @@ Padding(
 I've published this package recently, help in one of the following area is appreciated:
  * **Improving the README**: English is not my native language, any helps to improve the quality of the readme are welcome !
  * **Test coverage**: Add some tests, especially for the fieldFilter / widgetNameExtractor is a top priority.
- * **Improve the architecture/ code cleanliness**: Feel free to propose ameliorations, but i reserve myself the right to accept or reject them.
  * **Improve the code generator configuration**: Make code generators more flexible by adding more generation options. Parser is actually pretty basic and it probably need a refacto.
 
 If you like Neat, don't forget to leave a ⭐️ on the repo and share the package !
