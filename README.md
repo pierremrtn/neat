@@ -63,15 +63,15 @@ Container(
 * <a href="#features">Features</a>
 * <a href="#text-helpers">Text helpers</a>
 * <a href="#theme-accessors">Theme accessors</a>
-* <a href="#code-generator">Neat generator</a>
-  * <a href="#code-generator/basic-usage">Basic usage</a>
-  * <a href="#code-generator/ignore-lint-warnings-on-generated-files">Ignore lint warnings on generated files</a>
+* <a href="#neat-generator">Neat generator</a>
+  * <a href="#basic-usage">Basic usage</a>
+  * <a href="#ignore-lint-warnings-on-generated-files">Ignore lint warnings on generated files</a>
   * <a href="#space-widgets">Space widgets</a>
-    * <a href="#space-widgets/generated-constructors">Generated constructors</a>
-    * <a href="#space-widgets/example">Example</a>
+    * <a href="#generated-constructors">Generated constructors</a>
+    * <a href="#example">Example</a>
   * <a href="#padding-helpers">Padding helpers</a>
-    * <a href="#padding-helpers/generated-constructors">Generated Constructors</a>
-    * <a href="#padding-helpers/example">Example</a>
+    * <a href="#-generated-constructors-1">Generated Constructors</a>
+    * <a href="#example-1">Example</a>
 * <a href="#contributions">Contributions</a>
 
 
