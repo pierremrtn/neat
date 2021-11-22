@@ -1,68 +1,24 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:source_gen/source_gen.dart';
+import 'field_filter.dart';
+import 'widget_name_extractor.dart';
+
+import 'generator_for_class_annotation.dart';
 
 typedef CodeGenerator<T> = String Function(String fieldName, T value);
 
-class FieldFilter<T> {
-  const FieldFilter({
-    this.startsWith,
-  });
-  final String? startsWith;
-
-  bool include(String fieldName, T value) {
-    if (startsWith != null) {
-      return fieldName.startsWith(startsWith!);
-    }
-    return true;
-  }
-}
-
-class WidgetNameExtractor {
-  const WidgetNameExtractor({
-    required this.prefix,
-    required this.classRadical,
-    required this.removePrefix,
-    required this.radicalFirst,
-    required this.avoidPrefixRepetition,
-  })  : assert(removePrefix == false ||
-            (classRadical != null && classRadical != "")),
-        assert(removePrefix == false || prefix != null);
-
-  final String? prefix;
-  final String? classRadical;
-  final bool removePrefix;
-  final bool radicalFirst;
-  final bool avoidPrefixRepetition;
-
-  String extractWidgetName(String fieldName) {
-    String field = fieldName;
-    if (removePrefix) {
-      field = fieldName.replaceFirst(prefix!, "");
-    }
-
-    if (avoidPrefixRepetition &&
-        (classRadical?.isNotEmpty ?? false) &&
-        field.startsWithCaseInsensitive(classRadical!)) {
-      field = field.substring(classRadical!.length);
-    }
-
-    if (field.isNotEmpty) {
-      field = field[0].toUpperCase() + field.substring(1).toLowerCase();
-    }
-
-    final radical = classRadical ?? "";
-    if (radicalFirst) {
-      return "$radical$field";
-    } else {
-      return "$field$radical";
-    }
-  }
-}
-
-extension _Match on String {
-  bool startsWithCaseInsensitive(String s) {
-    return toLowerCase().startsWith(s.toLowerCase());
-  }
+extension ToGeneratorForClassLiteralsAnnotation on ConstantReader {
+  GeneratorForClassLiteralsAnnotation<T>
+      toGeneratorForClassLiteralsAnnotation<T>() =>
+          GeneratorForClassLiteralsAnnotation(
+            classRadical: read("classRadical").literalValue as String?,
+            generateForFieldStartingWith:
+                read("generateForFieldStartingWith").literalValue as String?,
+            removePrefix: read("removePrefix").literalValue as bool,
+            radicalFirst: read("radicalFirst").literalValue as bool,
+            avoidPrefixRepetition:
+                read("avoidPrefixRepetition").literalValue as bool,
+          );
 }
 
 ///Parse a class and generate code from literal fields

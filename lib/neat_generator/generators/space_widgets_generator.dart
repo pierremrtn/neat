@@ -1,28 +1,15 @@
 import 'package:code_builder/code_builder.dart';
+import 'package:neat/neat_generator/generator_for_class_annotation.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/dart/element/element.dart';
+
 import 'package:neat/neat_generator/class_literals_visitor.dart';
-import 'package:neat/neat_generator/generator_for_class_annotation.dart';
+import 'space_widgets_generator_annotation.dart';
 
-class SpaceWidgetsGeneratorAnnotation
-    extends GeneratorForClassLiteralsAnnotation<double> {
-  const SpaceWidgetsGeneratorAnnotation({
-    String? classRadical = "Space",
-    String? generateForFieldStartingWith = "space",
-    bool removePrefix = false,
-    bool radicalFirst = true,
-    bool avoidPrefixRepetition = true,
-  }) : super(
-          classRadical: classRadical,
-          generateForFieldStartingWith: generateForFieldStartingWith,
-          removePrefix: removePrefix,
-          radicalFirst: radicalFirst,
-          avoidPrefixRepetition: avoidPrefixRepetition,
-        );
-
-  SpaceWidgetsGeneratorAnnotation.fromConstantReader(
-    ConstantReader reader,
-  ) : super.fromConstantReader(reader);
+extension ToSpaceWidgetsGeneratorAnnotation on ConstantReader {
+  GeneratorForClassLiteralsAnnotation<double>
+      toSpaceWidgetsGeneratorAnnotation() =>
+          toGeneratorForClassLiteralsAnnotation<double>();
 }
 
 class SpaceWidgetsGenerator
@@ -33,7 +20,7 @@ class SpaceWidgetsGenerator
     ConstantReader annotation,
     _,
   ) {
-    final meta = SpaceWidgetsGeneratorAnnotation.fromConstantReader(annotation);
+    final meta = annotation.toSpaceWidgetsGeneratorAnnotation();
 
     final visitor = ClassLiteralsVisitor<double>(
       filter: meta.filter(),

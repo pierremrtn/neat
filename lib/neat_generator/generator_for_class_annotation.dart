@@ -1,5 +1,5 @@
-import 'package:neat/neat_generator/class_literals_visitor.dart';
-import 'package:source_gen/source_gen.dart';
+import 'field_filter.dart';
+import 'widget_name_extractor.dart';
 
 class GeneratorForClassLiteralsAnnotation<T> {
   const GeneratorForClassLiteralsAnnotation({
@@ -9,16 +9,6 @@ class GeneratorForClassLiteralsAnnotation<T> {
     this.radicalFirst = true,
     this.avoidPrefixRepetition = true,
   });
-
-  GeneratorForClassLiteralsAnnotation.fromConstantReader(
-    ConstantReader reader,
-  )   : classRadical = reader.read("classRadical").literalValue as String?,
-        generateForFieldStartingWith =
-            reader.read("generateForFieldStartingWith").literalValue as String?,
-        removePrefix = reader.read("removePrefix").literalValue as bool,
-        radicalFirst = reader.read("radicalFirst").literalValue as bool,
-        avoidPrefixRepetition =
-            reader.read("avoidPrefixRepetition").literalValue as bool;
 
   final String? classRadical;
   final String? generateForFieldStartingWith;

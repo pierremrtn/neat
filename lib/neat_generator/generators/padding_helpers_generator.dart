@@ -1,34 +1,31 @@
 import 'package:code_builder/code_builder.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/dart/element/element.dart';
+
 import 'package:neat/neat_generator/class_literals_visitor.dart';
-import 'package:neat/neat_generator/generator_for_class_annotation.dart';
+import 'padding_helpers_generator_annotation.dart';
 
-class PaddingHelpersGeneratorAnnotation
-    extends GeneratorForClassLiteralsAnnotation<double> {
-  const PaddingHelpersGeneratorAnnotation({
-    String? classRadical = "Padding",
-    String? generateForFieldStartingWith = "padding",
-    bool removePrefix = false,
-    bool radicalFirst = true,
-    bool avoidPrefixRepetition = true,
-    this.generateBinaryFlagConstructor = true,
-  }) : super(
-          classRadical: classRadical,
-          generateForFieldStartingWith: generateForFieldStartingWith,
-          removePrefix: removePrefix,
-          radicalFirst: radicalFirst,
-          avoidPrefixRepetition: avoidPrefixRepetition,
-        );
-
-  final bool generateBinaryFlagConstructor;
-
-  PaddingHelpersGeneratorAnnotation.fromConstantReader(
-    ConstantReader reader,
-  )   : generateBinaryFlagConstructor =
-            reader.read("generateBinaryFlagConstructor").boolValue,
-        super.fromConstantReader(reader);
+extension ToPaddingHelpersGeneratorAnnotation on ConstantReader {
+  PaddingHelpersGeneratorAnnotation toPaddingHelpersGeneratorAnnotation() {
+    final superAnnotation = toGeneratorForClassLiteralsAnnotation();
+    return PaddingHelpersGeneratorAnnotation(
+      generateForFieldStartingWith:
+          superAnnotation.generateForFieldStartingWith,
+      classRadical: superAnnotation.classRadical,
+      removePrefix: superAnnotation.removePrefix,
+      radicalFirst: superAnnotation.radicalFirst,
+      avoidPrefixRepetition: superAnnotation.avoidPrefixRepetition,
+      generateBinaryFlagConstructor:
+          read("generateBinaryFlagConstructor").boolValue,
+    );
+  }
 }
+
+// PaddingHelpersGeneratorAnnotation.fromConstantReader(
+//   ConstantReader reader,
+// )   : generateBinaryFlagConstructor =
+//           reader.read("generateBinaryFlagConstructor").boolValue,
+//       super.fromConstantReader(reader);
 
 class PaddingHelpersGenerator
     extends GeneratorForAnnotation<PaddingHelpersGeneratorAnnotation> {
@@ -40,8 +37,7 @@ class PaddingHelpersGenerator
     ConstantReader annotation,
     _,
   ) {
-    final meta =
-        PaddingHelpersGeneratorAnnotation.fromConstantReader(annotation);
+    final meta = annotation.toPaddingHelpersGeneratorAnnotation();
 
     generateBinaryFlagConstructor = meta.generateBinaryFlagConstructor;
 

@@ -1,23 +1,10 @@
 import 'package:build/build.dart';
-import 'package:neat/neat_generator/generators/padding_classes_generator.dart';
-import 'package:neat/neat_generator/generators/space_widgets_generator.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/dart/element/element.dart';
 
-class GroupedGeneratorAnnotation {
-  const GroupedGeneratorAnnotation({
-    ///padding helpers generator options
-    ///if null, padding helpers will not be generated
-    this.padding = const PaddingHelpersGeneratorAnnotation(),
-
-    ///space widgets generator options
-    ///if null, space widgets will not be generated
-    this.space = const SpaceWidgetsGeneratorAnnotation(),
-  });
-
-  final PaddingHelpersGeneratorAnnotation? padding;
-  final SpaceWidgetsGeneratorAnnotation? space;
-}
+import 'grouped_generator_annotation.dart';
+import 'package:neat/neat_generator/generators/padding_helpers_generator.dart';
+import 'package:neat/neat_generator/generators/space_widgets_generator.dart';
 
 class GroupedGenerator
     extends GeneratorForAnnotation<GroupedGeneratorAnnotation> {
