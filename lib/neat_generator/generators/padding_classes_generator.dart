@@ -84,10 +84,10 @@ class PaddingHelpersGenerator
                 ..initializers.add(
                   Code(
                     """super.only(
-  left: padding & top == 1 ? $padding : 0,
-  right: padding & right == 1 ? $padding : 0,
-  top: padding & top == 1 ? $padding : 0,
-  bottom: padding & bottom == 1 ? $padding : 0,)""",
+  left: padding & left == left ? $padding : 0,
+  right: padding & right == right ? $padding : 0,
+  top: padding & top == top ? $padding : 0,
+  bottom: padding & bottom == bottom ? $padding : 0,)""",
                   ),
                 )
                 ..constant = true,
