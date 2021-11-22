@@ -1,24 +1,58 @@
 # Neat
 Welcome to Neat, a utility package that helps doing cleaner Flutter code.
 
-If you like Neat, don't forget to leave a ⭐️ on the repo and share the package !
-
-![example screenshot](doc/neat_dimensions_class_example.png)
-![example screenshot](doc/neat_example.png)
-
-# Motivation
-
-As the code grow, Flutter's widget trees quickly becomes difficult to read. Neat package is designed to make the code easier to read by introducing convenient solutions to improve common patterns.
-
-Neat is just a collection of utility functions and code generator so it hasn't any impact on performances. Its just a matter of efficiently and readability.
-
-Note that every features of neat are independents. If you don't like one of them, just ignore it. 
+Flutter framework is very verbose and widget trees quickly becomes difficult to read. Neat package is designed to make the code easier to read by introducing convenient solutions for common patterns without requiring any additional work from your part.
 
 Actually, neat provide 4 types of helpers and widgets:
 - **Text helpers** that helps you create headlines/subtitles/bodyTexts
 - **Theme accessor** for easily access theme's data
-- **Space widgets**, widgets generated from your data that inherit from SizedBox
-- **Padding helpers**, helper class generated from your data that inherit from EdgeInsets class
+- **Space widgets**, a blank space widgets, generated from your own data, that inherit from SizedBox
+- **Padding helpers**, for easily creating padding. Helpers are generated from your own data
+
+take this example, without neat:
+```dart
+import 'dimensions.dart'; //you declare constants in this file
+
+Text(
+  "Flutter is awesome but...",
+  style: Theme.of(context).textTheme.headline1,
+),
+const SizedBox(
+  height: Dimensions.spaceSmall,
+),
+Container(
+  color: Theme.of(context).colorScheme.surface,
+  padding: EdgeInsets.only(
+    left: Dimensions.paddingSmall,
+    right: Dimensions.paddingSmall,
+    bottom: Dimensions.paddingSmall,
+  ),
+  child: Text(
+    "...its a little bit verbose",
+    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+      color: Theme.of(context).colorScheme.primary,
+    ),
+  ),
+),
+```
+
+with Neat could write:
+```dart
+import 'package:neat/neat.dart';
+import 'dimensions.dart';
+
+context.headline1("Neat make your life easier"),
+const SpaceSmall(),
+Container(
+  color: context.colorScheme.surface,
+  padding: PaddingSmall(left | right | bottom),
+  child: context.bodyText1(
+    "you can override the style",
+    style: TextStyle(color: context.colorScheme.primary),
+  ),
+),
+```
+**_Pretty neat, isn't it ?_**
 
 # Summary
 
@@ -480,3 +514,4 @@ I've published this package recently, help in one of the following area is appre
  * **Improve the architecture/ code cleanliness**: Feel free to propose ameliorations, but i reserve myself the right to accept or reject them.
  * **Improve the code generator configuration**: Make code generators more flexible by adding more generation options. Parser is actually pretty basic and it probably need a refacto.
 
+If you like Neat, don't forget to leave a ⭐️ on the repo and share the package !
