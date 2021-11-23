@@ -1,18 +1,19 @@
 # Neat 
-Welcome to Neat, a utility package that helps doing cleaner Flutter code.
-
-Flutter framework is very verbose and widget trees quickly becomes difficult to read. Neat package is designed to make the code easier to read by introducing convenient solutions for common patterns without requiring any additional work from your part.
 
 | **neat** | [![pub package](https://img.shields.io/pub/v/riverpod.svg?label=riverpod&color=blue)](https://pub.dartlang.org/packages/riverpod) |
 |----------|-----------------------------------------------------------------------------------------------------------------------------------|
 
+Welcome to Neat, a utility package that helps make clean Flutter code.
+
+Flutter framework is very verbose and widget trees quickly becomes difficult to read. Neat package is designed to make the code more expressive, shorter and easier to understand by introducing convenient solutions for common patterns without requiring any additional work from your part.
+
 Actually, neat provide 4 types of helpers and widgets:
 - **Text helpers** that helps you create headlines/subtitles/bodyTexts
-- **Theme accessor** for easily access theme's data
-- **Space widgets**, a blank space widgets, generated from your own data, that inherit from SizedBox
-- **Padding helpers**, for easily creating padding. Helpers are generated from your own data
+- **Theme accessors** for easily access theme's data
+- **Space widgets**, a blank space widgets, generated from your own data that inherit from SizedBox
+- **Padding helpers**, for easily creating padding thanks to helpers generated from your own data
 
-take this example, without neat:
+Take this example, without neat:
 ```dart
 import 'dimensions.dart'; //you declare constants in this file
 
@@ -39,7 +40,7 @@ Container(
 ),
 ```
 
-with Neat could write:
+With Neat you could write:
 ```dart
 import 'package:neat/neat.dart';
 import 'dimensions.dart';
@@ -58,7 +59,6 @@ Container(
 **_Pretty neat, isn't it ?_**
 
 # Summary
-
 * <a href="#install">Installation</a>
 * <a href="#features">Features</a>
 * <a href="#text-helpers">Text helpers</a>
@@ -77,7 +77,6 @@ Container(
 
 # How to use
 ## Install
-
 Install Neat by running following command:
 ```
 flutter pub add neat
@@ -86,8 +85,8 @@ If you want to use the Neat's code generator, you will need your typical build_r
 ```
 flutter pub add build_runner -dev
 ```
-Theses will add the following dependencies to your `pubspec.yaml` file:
-```
+These commands will add the following dependencies to your `pubspec.yaml` file:
+```yaml
 # pubspec.yaml
 dependencies:
   neat:
@@ -97,23 +96,21 @@ dev_dependencies:
 ```
 
 # Features
-
 Neat has to distinct parts:
-* A collection of helpers and widgets, that you can import with `import 'package:neat/neat.dart';`
+* A collection of helpers and widgets that you can import with `import 'package:neat/neat.dart';`
 
-* A code generator, that you can import with `import 'package:neat/generator.dart';`
+* A code generator that you can import with `import 'package:neat/generator.dart';`
 
 ## Text helpers
-
 In most flutter applications, you define TextStyles in your material `ThemeData` and then to create, for example, a Headline1, you should do the following:
-```
+```dart
 Text(
     "Headline1",
     style: Theme.of(context).textTheme.headline1,
 ),
 ```
-If you wants to override some properties of the style its get even worth:
-```
+If you want to override some properties of the style it getting even worth:
+```dart
 Text(
   "Headline1",
   style: Theme.of(context)
@@ -123,7 +120,7 @@ Text(
 ),
 ```
 Neat introduce a collection of extension on `BuildContext` that simplify the creation of headlines and other types of text defined in material textTheme:
-```
+```dart
 import 'package:neat/neat.dart';
 
 // It's that simple !
@@ -137,7 +134,7 @@ context.headline1(
 ```
 
 Every text types are available:
-```
+```dart
 context.headline1("Headline1"),
 context.headline2("Headline2"),
 context.headline3("Headline3"),
@@ -152,36 +149,41 @@ context.overline("overline"),
 context.buttonText("button"),
 ```
 
-All methods have same properties than regular Text widget:
+If you specify a `TextStyle`, it will be merged with corresponding base theme found in your `textTheme`, like this:
+```dart
+Theme.of(context).textTheme.{textType}?.merge(style),
 ```
+
+All text extensions have the same properties as the regular `Text` widget:
+```dart
 context.headline1(
-    Headline1,
-    key: key,
-    style: style,
-    strutStyle: strutStyle,
-    textAlign: textAlign,
-    textDirection: textDirection,
-    locale: locale,
-    softWrap: softWrap,
-    overflow: overflow,
-    textScaleFactor: textScaleFactor,
-    maxLines: maxLines,
-    semanticsLabel: semanticsLabel,
-    textWidthBasis: textWidthBasis,
-    textHeightBehavior: textHeightBehavior,
-    weight: weight,
-),
+    String text, {
+    Key? key,
+    TextStyle? style,
+    StrutStyle? strutStyle,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    Locale? locale,
+    bool? softWrap,
+    TextOverflow? overflow,
+    double? textScaleFactor,
+    int? maxLines,
+    String? semanticsLabel,
+    TextWidthBasis? textWidthBasis,
+    TextHeightBehavior? textHeightBehavior,
+    FontWeight? weight,
+  }),
 ```
 
 ## Theme accessors
 Without Neat, you access ThemeData, textTheme and colorScheme in the following way:
-```
+```dart
 Theme.of(context);
 Theme.of(context).textTheme;
 Theme.of(context).colorScheme;
 ```
-Neat introduce this alternative way to access your theme:
-```
+Neat introduce an alternative way to access your theme:
+```dart
 import 'package:neat/neat.dart';
 
 context.theme;
@@ -224,13 +226,13 @@ Padding(
   child: ...,
 )
 ```
-The generator is flexible and let you configure generated widget names, filters what field to include or exclude from generation, etc. See Generator Options for more details about generation options. 
+The generator is flexible and use multiple data source class, let you configure generated widget names, filters what field to include or exclude from generation, etc. See Generator Options for more details about generation options. 
 
 ### basic usage
 
-Create a Dimensions class and annotate it with `@Neat.generate`. Neat generator will generate both spacing widgets and padding helpers for classes annotated with it.
+Create a Dimensions class and annotate it with `@Neat.generate`. Neat generator will generate spacing widget for each field that starts with "space" and padding helper for each one that starts with "padding". More details about advanced configuration <a href="doc/generator.md">here</a>.
 
-**dimensions.dart**
+*dimensions.dart*
 ```dart
 import 'package:neat/generator.dart';
 
@@ -297,7 +299,7 @@ const SpaceX.w(); //SizedBox(width: X, height: 0);
 ```
 
 #### Example
-**dimensions.dart**
+*dimensions.dart*
 ```dart
 import 'package:neat/generator.dart';
 
@@ -310,20 +312,18 @@ class Dimensions {
   static const double spaceBig = 55;
 }
 ```
-**main.dart**
+*main.dart*
 ```dart
 import 'dimensions.dart';
 
-const SpaceSmall();     //h: 21, w: 21
-const SpaceMedium.w();  //h: 0, w: 34
-const SpaceBig.h();     //h: 55, w: 0
+const SpaceSmall();     //SizedBox(height: 21,  width: 21);
+const SpaceMedium.w();  //SizedBox(height: 0,   width: 34);
+const SpaceBig.h();     //SizedBox(height: 55,  width: 0);
 ```
 
 ### Padding helpers
 PaddingHelpers inherit from EdgeInsets class and define new constructors with pre-filled values based on data in your value class.
-By default, space widgets are generated from `static const double` fields of a class annotated `@Neat.generate` and that starts with "padding". The generator will name classes according to their fieldName.
-
-Note that the binary flag constructor used generated constants (top, left, right, bottom) to works. If its causing conflicts in your code, you can disable it by using `generateBinaryFlagConstructor = false`. More details about generator configuration <a href="/doc/generator.md">here</a>.
+By default, helpers are generated from `static const double` fields of a class annotated `@Neat.generate` and that starts with "padding". The generator will name classes according to their fieldName.
 
 #### Generated constructors
 ```dart
@@ -338,9 +338,10 @@ const PaddingX.only(                          //EdgeInsets.only(top: X, left: X,
   bottom: true,
 );
 ```
+Note that the binary flag constructor `Padding(top | left | right | bottom)` use generated constants (top, left, right, bottom) to works. If its causing conflicts in your code, you can disable it by using `generateBinaryFlagConstructor = false`. More details about generator configuration <a href="/doc/generator.md">here</a>.
 
 #### Example
-**dimensions.dart**
+*dimensions.dart*
 ```dart
 import 'package:neat/generator.dart';
 
@@ -356,7 +357,7 @@ class Paddings {
 }
 ```
 
-**main.dart**
+*main.dart*
 ```dart
 import 'dimensions.dart';
 
@@ -370,9 +371,9 @@ Padding(padding: Padding5.only(top: true, left: true)); //EdgeInsets.only(top: 5
 **Wants to contribute ?** I'm happy to discuss about what feature to add next !
 
 I've published this package recently, help in one of the following area is appreciated:
- * **Improving the README**: English is not my native language, any helps to improve the quality of the readme are welcome !
- * **Test coverage**: Add some tests, especially for the fieldFilter / widgetNameExtractor is a top priority.
- * **Improve the code generator configuration**: Make code generators more flexible by adding more generation options. Parser is actually pretty basic and it probably need a refacto.
+ * **Improving the README**: English is not my native language, PRs to improve the quality of the readme are welcome !
+ * **Test coverage**: Adding some tests, especially for the fieldFilter / widgetNameExtractor is a top priority.
+ * **Improve the code generator configuration**: Make code generators more flexible by adding more generation options. Parser is actually pretty basic and it probably need to be refactored.
 
 If you like Neat, don't forget to leave a ⭐️ on the repo and share the package !
 
