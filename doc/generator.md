@@ -31,13 +31,13 @@ By default, global generator generate Space widgets for each field that starts w
 
 The global generator call others neat generators under the hood. Its purpose is to let you use all generator at once with only one annotation.
 
-Global generator will run on every class annotated with `@Neat.generate` or `@NeatGenerator()`.
-`@Neat.generate` syntax is just a constant NeatGenerator() instance with default values. Using `@NeatGenerator` syntax directly let you customize generator's behavior.
+Global generator will run on every class annotated with `@Neat.generate` or `@NeatGenerate()`.
+`@Neat.generate` syntax is just a constant NeatGenerate() instance with default values. Using `@NeatGenerate` syntax directly let you customize generator's behavior.
 
 ### available options
 
 ```dart
-@NeatGenerator(
+@NeatGenerate(
     ///space widgets generator options
     ///if null, space widgets will not be generated
     space = const GenerateSpace(),
@@ -101,29 +101,27 @@ Specify if classRadical should be printed before or after the fieldName
 **avoidPrefixRepetition: bool = true**<br/>
 If true, remove the beginning of field name if its match `classRadical`.
 
-### example
-*input*
+### Example
+*dimensions.dart*
 ```dart
 import 'package:neat/generator.dart';
 
-@GenerateSpace(
-  classRadical: "Spacing",
-  generateForFieldStartingWith: "s",
-  removePrefix: true,
-)
-class Spaces {
-  static const double s1: 5,
-  static const double s2: 8,
-  static const double s3: 13,
-  static const double sSpecial: 42,
+part 'dimensions.nt.dart';
+
+@Neat.generate
+class Dimensions {
+  static const double spaceSmall = 21;
+  static const double spaceMedium = 34;
+  static const double spaceBig = 55;
 }
 ```
-*output*
+*main.dart*
 ```dart
-Space1();
-Space2();
-Space3();
-SpaceSpecial();
+import 'dimensions.dart';
+
+const SpaceSmall();     //SizedBox(height: 21,  width: 21);
+const SpaceMedium.w();  //SizedBox(height: 0,   width: 34);
+const SpaceBig.h();     //SizedBox(height: 55,  width: 0);
 ```
 
 ### Implementation details
@@ -160,8 +158,49 @@ Padding generator will run on every class annotated with `@Neat.generatePadding`
 
 - `@Neat.generateSpace` is an instance of `GenerateSpace` configured to generate space widget for every field of the class, no matter how they are named. This annotation is best suited if you want to separate you Spacing class from your other Dimensions class.
 
-### Padding helper generator options
+### Padding helper usage
 
+*dimensions.dart*
+```dart
+import 'package:neat/generator.dart';
+
+part 'dimensions.nt.dart';
+
+@Neat.generatePadding
+class Paddings {
+  static const double padding1 = 21;
+  static const double padding2 = 13;
+  static const double padding3 = 8;
+  static const double padding4 = 5;
+  static const double padding5 = 3;
+}
+```
+
+*main.dart*
+```dart
+import 'dimensions.dart';
+
+Padding(padding: Padding1.all());                       //EdgeInsets.all(21)
+Padding(padding: Padding2.horizontal());                //EdgeInsets.symmetric(horizontal: 13)
+Padding(padding: Padding3.vertical());                  //EdgeInsets.symmetric(vertical: 8)
+Padding(padding: Padding4(top | left));                 //EdgeInsets.only(top: 5, left: 5)
+Padding(padding: Padding5.only(top: true, left: true)); //EdgeInsets.only(top: 5, left: 5)
+```
+
+### Binary flag constructor
+```dart
+PaddingX(top | left | right | bottom)
+```
+Binary flags constructor use 4 constant two works:
+```dart
+const right = 0x1000;
+const left = 0x0100;
+const top = 0x0010;
+const bottom = 0x0001;
+```
+If it's causing conflict in your code, you can disable variable declaration and constructor declaration with `generateBinaryFlagConstructor = false`.
+
+### Padding helper generator options
 **generateBinaryFlagConstructor: bool = true**<br/>
 Specify if generator should generate binary flag constructor (`PaddingX(top | left | right | bottom)`)
 
