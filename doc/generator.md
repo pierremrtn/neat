@@ -16,43 +16,30 @@ import 'package:neat/generator.dart';
 part 'my_file.nt.dart';
 ```
 
-to run the generator, use the following command: `flutter pub run build_runner build`.
+To run the generator, use the following command: `flutter pub run build_runner build`.
 I recommend using the option `--delete-conflicting-outputs` to avoid problems during builds.
 
-## Different generators
-Neat generator is composed of 3 distinct generator. :
-* **Space generator** will run on class annotated with @Neat.generateSpace. It generate space widget.
-* **Padding generator** will run on class annotated with @Neat.generatePadding. It generate padding helper.
-* **Global generator** will run on class annotated with @Neat.generate. It regroup every generators at once.
+## Generators
+Neat generator is composed of 3 distinct generator:
+* **Space generator**: space Widget generator that run on class annotated with `@GenerateSpace`.
+* **Padding generator**: padding helper that run on class annotated with @GeneratePadding.
+* **Global generator**: generator that run on class annotated with `@NeatGenerate` that call every other generators under the hood.
 
-## global generator
-
-By default, global generator generate Space widgets for each field that starts with "space" and padding helper for each field that starts with "padding".
+## Global generator
 
 The global generator call others neat generators under the hood. Its purpose is to let you use all generator at once with only one annotation.
+Space generator will run on every class annotated with `@Neat.generate` or `@NeatGenerate()`.
+- `@Neat.generate` is an instance of `NeatGenerate` with default values. It will generate Space widgets for each field that starts with "space" and padding helper for each field that starts with "padding".
 
-Global generator will run on every class annotated with `@Neat.generate` or `@NeatGenerate()`.
-`@Neat.generate` syntax is just a constant NeatGenerate() instance with default values. Using `@NeatGenerate` syntax directly let you customize generator's behavior.
+- `@NeatGenerate()` annotation let you pass generator's configurations as parameter. Default configuration will generate Space widgets for each field that starts with "space" and padding helper for each field that starts with "padding". You can pass space generator option with space parameter and padding generator options with padding parameter.
 
-### available options
 
-```dart
-@NeatGenerate(
-    ///space widgets generator options
-    ///if null, space widgets will not be generated
-    space = const GenerateSpace(),
-
-    ///padding helpers generator options
-    ///if null, padding helpers will not be generated
-    padding = const GeneratePadding(),
-  });
-```
-
+### Available options
 **space: GenerateSpace? = const GenerateSpace()** Space Generator options. See <a href="#space-widget-generator-options">space generator options</a> for more details. If you set space parameter to null, Space widget will not be generated.
 
 **padding: GeneratePadding? = const GeneratePadding()** Padding Generator options. See <a href="#padding-helpers-generator-options">padding generator options</a> for more details. If you set padding parameter to null, Padding helpers will not be generated.
 
-### example
+### Example
 *input*
 ```dart
 @NeatGenerate(
@@ -76,12 +63,12 @@ class Dimensions {
 }
 ```
 
-## space generator
+## Space generator
 
 Space widget generator use `static const double` fields of a class to generate space widgets that represent blank space in your app and inherit from SizedBox.
 
 Space generator will run on every class annotated with `@Neat.generateSpace` or `@GenerateSpace()`.
-- `@GenerateSpace()` annotation let you pass generator configuration as constructor parameter. Default configuration will generate a Space widget for every class fields that starts with "space". More details available options <a href="Space-widget-generator-options">here</a>.
+- `@GenerateSpace()` annotation let you pass generator configuration as constructor parameter. Default configuration will generate a Space widget for every class fields that starts with "space". More details about available options <a href="Space-widget-generator-options">here</a>.
 
 - `@Neat.generateSpace` is an instance of `GenerateSpace` configured to generate space widget for every field of the class, no matter how they are named. This annotation is best suited if you want to separate you Spacing class from your other Dimensions class.
 
@@ -150,7 +137,7 @@ class SpaceX extends SizedBox {
         );
 }
 ```
-## padding generators
+## Padding generators
 Padding generator use `static const double` fields of a class to generate padding helper class that helps construct EdgeInsets with pre-filled values.
 
 Padding generator will run on every class annotated with `@Neat.generatePadding` or `@GeneratePadding()`.
@@ -219,7 +206,7 @@ Specify if classRadical should be printed before or after the fieldName
 **avoidPrefixRepetition: bool = true**<br/>
 If true, remove the beginning of field name if its match `classRadical`.
 
-### implementation details
+### Implementation details
 Generated padding helpers will follow this structure, with `X` set to fieldName after been transformed accordingly to generator options and `value` set to field's value: 
 ```dart
 class PaddingX extends EdgeInsets {
