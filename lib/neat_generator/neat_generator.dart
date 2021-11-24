@@ -3,7 +3,7 @@ import 'package:dart_style/dart_style.dart';
 import 'package:source_gen/source_gen.dart';
 import 'dart:core';
 
-import 'package:neat/neat_generator/generators/grouped_generator.dart';
+import 'package:neat/neat_generator/generators/global_generator.dart';
 import 'generators/padding_helpers_generator.dart';
 import 'generators/space_widgets_generator.dart';
 
@@ -23,7 +23,7 @@ Builder neatGenerator(BuilderOptions options) {
 
   return PartBuilder(
     [
-      GroupedGenerator(),
+      GlobalGenerator(),
       SpaceWidgetsGenerator(),
       PaddingHelpersGenerator(),
     ],

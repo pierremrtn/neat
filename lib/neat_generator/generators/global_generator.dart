@@ -2,12 +2,12 @@ import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/dart/element/element.dart';
 
-import 'grouped_generator_annotation.dart';
+import 'global_generator_annotation.dart';
 import 'package:neat/neat_generator/generators/padding_helpers_generator.dart';
 import 'package:neat/neat_generator/generators/space_widgets_generator.dart';
 
-class GroupedGenerator
-    extends GeneratorForAnnotation<GroupedGeneratorAnnotation> {
+class GlobalGenerator
+    extends GeneratorForAnnotation<GlobalGeneratorAnnotation> {
   @override
   String generateForAnnotatedElement(
     Element element,

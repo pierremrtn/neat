@@ -1,8 +1,8 @@
 import 'package:neat/neat_generator/generators/padding_helpers_generator_annotation.dart';
 import 'package:neat/neat_generator/generators/space_widgets_generator_annotation.dart';
 
-class GroupedGeneratorAnnotation {
-  const GroupedGeneratorAnnotation({
+class GlobalGeneratorAnnotation {
+  const GlobalGeneratorAnnotation({
     ///padding helpers generator options
     ///if null, padding helpers will not be generated
     this.padding = const PaddingHelpersGeneratorAnnotation(),
