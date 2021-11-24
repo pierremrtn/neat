@@ -27,7 +27,7 @@ Neat generator is composed of 3 distinct generator:
 
 ## Global generator
 
-The global generator call others neat generators under the hood. Its purpose is to let you use all generator at once with only one annotation.
+The global generator call others neat generators under the hood. Its purpose is to let you use all generators at once with only one annotation.
 Space generator will run on every class annotated with `@Neat.generate` or `@NeatGenerate()`.
 - `@Neat.generate` is an instance of `NeatGenerate` with default values. It will generate Space widgets for each field that starts with "space" and padding helper for each field that starts with "padding".
 
@@ -40,44 +40,54 @@ Space generator will run on every class annotated with `@Neat.generate` or `@Nea
 **padding: GeneratePadding? = const GeneratePadding()** Padding Generator options. See <a href="#padding-helpers-generator-options">padding generator options</a> for more details. If you set padding parameter to null, Padding helpers will not be generated.
 
 ### Example
-*input*
 ```dart
-@NeatGenerate(
-  //custom padding generator config
-  padding: GeneratePadding(
-    classRadical: "P",
-    generateForFieldStartingWith: "padding",
-    removePrefix: true,
-    generateBinaryFlagConstructor: false,
-  ),
-  //disable space generation
-  space: null,
-)
-class Dimensions {
-  static const double padding1 = 1;
-  static const double padding2 = 2;
-  static const double padding3 = 3;
+import 'package:neat/generator.dart';
 
-  //excluded since it doesn't starts with "padding"
-  static const double sizeSmall = 1;
+part 'dimensions.nt.dart';
+
+@Neat.generate
+class Dimensions {
+  static const double spaceSmall = 21;
+  static const double spaceMedium = 34;
+  static const double spaceBig = 55;
+  static const double spaceAnyNameYouWant = 42;
+
+  static const double paddingSmall = 21;
+  static const double paddingMedium = 34;
+  static const double paddingBig = 55;
+  static const double paddingAnyNumberYouWant = 42;
 }
 ```
+
+```dart
+import 'dimensions.dart';
+
+SpaceSmall()                        //SizedBox(height: 21,  width: 21);
+SpaceMedium.w()                     //SizedBox(height: 0,   width: 34);
+SpaceBig.h()                        //SizedBox(height: 55,  width: 0);
+SpaceAnyNameYouWant()               //SizedBox(height: 42,  width: 42);
+
+PaddingSmall.all()                  //EdgeInsets.all(21)
+PaddingMedium.horizontal()          //EdgeInsets.symmetric(horizontal: 13)
+PaddingBig.vertical()               //EdgeInsets.symmetric(vertical: 8)
+PaddingAnyNumberYouWant(top | left) //EdgeInsets.only(top: 42, left: 42)
+``` 
 
 ## Space generator
 
 Space widget generator use `static const double` fields of a class to generate space widgets that represent blank space in your app and inherit from SizedBox.
 
 Space generator will run on every class annotated with `@Neat.generateSpace` or `@GenerateSpace()`.
-- `@GenerateSpace()` annotation let you pass generator configuration as constructor parameter. Default configuration will generate a Space widget for every class fields that starts with "space". More details about available options <a href="Space-widget-generator-options">here</a>.
+- `@GenerateSpace()` annotation let you pass generator configuration as constructor parameter. Default configuration will generate a Space widget for every class fields that start with "space". More details about available options <a href="Space-widget-generator-options">here</a>.
 
-- `@Neat.generateSpace` is an instance of `GenerateSpace` configured to generate space widget for every field of the class, no matter how they are named. This annotation is best suited if you want to separate you Spacing class from your other Dimensions class.
+- `@Neat.generateSpace` is an instance of `GenerateSpace` configured to generate space widget for every field of the class, no matter how they are named. This annotation is best suited if you want to separate your `Spacing` class from your others `Dimensions` class.
 
 ### Space widget generator options
 **classRadical: String? = "Space"**<br/>
 The base name of widget that will be generated.
 
 **generateForFieldStartingWith: String? = "space"**<br/>
-If not-null, generator will only generate Space widget for field where `fieldName.startsWith(generateForFieldStartingWith) == true`. If null, every fields of the class will be used to generate a corresponding widget.
+If not-null, generator will only generate Space widget for field where `fieldName.startsWith(generateForFieldStartingWith) == true`. If null, every field of the class will be used to generate a corresponding widget.
 
 **removePrefix: bool = false**<br/>
 Remove prefix specified by generateForFieldStartingWith parameter form fieldName.
@@ -137,13 +147,13 @@ class SpaceX extends SizedBox {
         );
 }
 ```
-## Padding generators
+## Padding generator
 Padding generator use `static const double` fields of a class to generate padding helper class that helps construct EdgeInsets with pre-filled values.
 
 Padding generator will run on every class annotated with `@Neat.generatePadding` or `@GeneratePadding()`.
 - `@GeneratePadding()` annotation let you pass generator configuration as constructor parameter. Default configuration will generate a padding helper class for every fields that starts with "padding". More details about available options <a href="Padding-helper-generator-options">here</a>.
 
-- `@Neat.generateSpace` is an instance of `GenerateSpace` configured to generate space widget for every field of the class, no matter how they are named. This annotation is best suited if you want to separate you Spacing class from your other Dimensions class.
+- `@Neat.generateSpace` is an instance of `GenerateSpace` configured to generate space widget for every field of the class, no matter how they are named. This annotation is best suited if you want to separate your `Paddings` class from your others `Dimensions` class.
 
 ### Padding helper usage
 
@@ -178,14 +188,14 @@ Padding(padding: Padding5.only(top: true, left: true)); //EdgeInsets.only(top: 5
 ```dart
 PaddingX(top | left | right | bottom)
 ```
-Binary flags constructor use 4 constant two works:
+Binary flags constructor use 4 constants to works:
 ```dart
 const right = 0x1000;
 const left = 0x0100;
 const top = 0x0010;
 const bottom = 0x0001;
 ```
-If it's causing conflict in your code, you can disable variable declaration and constructor declaration with `generateBinaryFlagConstructor = false`.
+If it's causing conflict in your code, you can disable constants and constructor generation with `generateBinaryFlagConstructor = false`.
 
 ### Padding helper generator options
 **generateBinaryFlagConstructor: bool = true**<br/>
