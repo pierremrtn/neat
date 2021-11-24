@@ -195,13 +195,13 @@ context.colorScheme;
 When you want to keep your spacing and padding consistent across your app, you often end up with a Dimension class holding all your variables at the same place, like this:
 ```dart
 class Dimensions {
-    static double paddingSmall = 8;
-    static double paddingMedium = 13;
-    static double paddingBig = 21;
+    static const double paddingSmall = 8;
+    static const double paddingMedium = 13;
+    static const double paddingBig = 21;
 
-    static double spaceSmall = 13;
-    static double spaceMedium = 21;
-    static double spaceBig = 34;
+    static const double spaceSmall = 13;
+    static const double spaceMedium = 21;
+    static const double spaceBig = 34;
 }
 ```
 Then you use these values in your app:
