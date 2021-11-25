@@ -1,3 +1,6 @@
+## 0.1.1
+Remove <br/> in README.md
+
 ## 0.1.0
 Split package in 3 (`neat`, `neat_generator` and `neat_annotations`).
 Now you should use neat package as runtime dependency and neat_generator as dev dependency.
