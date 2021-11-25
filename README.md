@@ -1,6 +1,6 @@
 # Neat 
 
-| **neat** | [![pub package](https://img.shields.io/pub/v/riverpod.svg?label=riverpod&color=blue)](https://pub.dartlang.org/packages/riverpod) |
+| **neat** | [![pub package](https://img.shields.io/pub/v/neat.svg?label=neat&color=blue)](https://pub.dev/packages/neat) |
 |----------|-----------------------------------------------------------------------------------------------------------------------------------|
 
 Welcome to Neat, a utility package that helps make clean Flutter code.
