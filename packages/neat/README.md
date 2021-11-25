@@ -228,7 +228,7 @@ Padding(
   child: ...,
 )
 ```
-The generator is flexible and let you use multiple data source class, configure how widget names are generated, filters what field to include or exclude from generation, etc. See <a href="https://github.com/Pierre2tm/neat/blob/main/https://github.com/Pierre2tm/neat/blob/main/packages/neat/doc/generator.md">generator options</a> for advanced usage. 
+The generator is flexible and let you use multiple data source class, configure how widget names are generated, filters what field to include or exclude from generation, etc. See <a href="https://github.com/Pierre2tm/neat/blob/main/packages/neat/doc/generator.md">generator options</a> for advanced usage. 
 
 ### Basic usage
 Create a `Dimensions` class and annotate it with `@Neat.generate`. Neat generator will generate one `Space` widget for each field that starts with "space" and one padding helper for each field that starts with "padding".
