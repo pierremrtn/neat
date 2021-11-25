@@ -30,7 +30,7 @@ Neat generator is composed of 3 distinct generator:
 Space widget generator use `static const double` fields of a class to generate space widgets that represent blank space in your app and inherit from SizedBox.
 
 Space generator will run on every class annotated with `@Neat.generateSpace` or `@GenerateSpace()`.
-- `@GenerateSpace()` annotation let you pass generator configuration as constructor parameter. Default configuration will generate a space widget for every class fields that start with "space". More details about available options <a href="space-widget-generator-options">here</a>.
+- `@GenerateSpace()` annotation let you pass generator configuration as constructor parameter. Default configuration will generate a space widget for every class fields that start with "space". More details about available options <a href="#space-widget-generator-options">here</a>.
 
 - `@Neat.generateSpace` is an instance of `GenerateSpace` class configured to generate space widget for every field of the class, no matter how they are named. This annotation is best suited if you want to separate your `Spacing` class from your others `Dimensions` class.
 
@@ -103,7 +103,7 @@ class SpaceX extends SizedBox {
 Padding generator use `static const double` fields of a class to generate padding helper class that helps construct EdgeInsets with pre-filled values.
 
 Padding generator will run on every class annotated with `@Neat.generatePadding` or `@GeneratePadding()`.
-- `@GeneratePadding()` annotation let you pass generator configuration as constructor parameter. Default configuration will generate a padding helpers for every fields that starts with "padding". More details about available options <a href="padding-helper-generator-options">here</a>.
+- `@GeneratePadding()` annotation let you pass generator configuration as constructor parameter. Default configuration will generate a padding helpers for every fields that starts with "padding". More details about available options <a href="#padding-helper-generator-options">here</a>.
 
 - `@Neat.generatePadding` is an instance of `GeneratePadding` class configured to generate padding helpers for every field of the class, no matter how they are named. This annotation is best suited if you want to separate your `Paddings` class from your others `Dimensions` class.
 
