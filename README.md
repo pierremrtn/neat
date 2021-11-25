@@ -226,7 +226,7 @@ Padding(
   child: ...,
 )
 ```
-The generator is flexible and use multiple data source class, let you configure generated widget names, filters what field to include or exclude from generation, etc. See <a href="https://github.com/Pierre2tm/neat/blob/main/https://github.com/Pierre2tm/neat/blob/main/doc/generator.md#global-generator">generator options</a> for advanced usage. 
+The generator is flexible and use multiple data source class, let you configure generated widget names, filters what field to include or exclude from generation, etc. See <a href="https://github.com/Pierre2tm/neat/blob/main/https://github.com/Pierre2tm/neat/blob/main/doc/generator.md">generator options</a> for advanced usage. 
 
 ### Basic usage
 Create a `Dimensions` class and annotate it with `@Neat.generate`. Neat generator will generate one `Space` widget for each field that starts with "space" and one padding helper for each field that starts with "padding".
@@ -290,7 +290,7 @@ analyzer:
 ### Space Widgets
 Space Widget represents a blank space in your app. This widget inherit from SizedBox and define constructors with pre-filled height and width values, based on data in your value class.
 By default, space widgets are generated from `static const double` fields of a class annotated `@Neat.generate` and that starts with "space". The generator will name widgets according to their corresponding fieldName.
-There are few class annotations for different use case and you can customize the generator behavior by adding some parameters to the annotation. More details <a href="/https://github.com/Pierre2tm/neat/blob/main/doc/generator.md#space-generator">here</a>.
+There are few class annotations for different use case and you can customize the generator behavior by adding some parameters to the annotation. More details <a href="https://github.com/Pierre2tm/neat/blob/main/doc/generator.md#space-generator">here</a>.
 
 #### Generated constructors
 ```dart
@@ -325,7 +325,7 @@ const SpaceBig.h();     //SizedBox(height: 55,  width: 0);
 ### Padding helpers
 PaddingHelpers inherit from EdgeInsets class and define new constructors with pre-filled values based on data in your value class.
 By default, helpers are generated from `static const double` fields of a class annotated `@Neat.generate` and that starts with "padding". The generator will name classes according to their corresponding fieldName.
-There are few class annotations for different use case and you can customize the generator behavior by adding some parameters to the annotation. More details <a href="/https://github.com/Pierre2tm/neat/blob/main/doc/generator.md">here</a>.
+There are few class annotations for different use case and you can customize the generator behavior by adding some parameters to the annotation. More details <a href="https://github.com/Pierre2tm/neat/blob/main/doc/generator.md">here</a>.
 
 #### Generated constructors
 ```dart
@@ -340,7 +340,7 @@ const PaddingX.only(                            //EdgeInsets.only(
   bottom: true,                                 //  bottom: X,
 );                                              //);
 ```
-Note that the binary flag constructor `Padding(top | left | right | bottom)` use generated constants (top, left, right, bottom) to works. If it causing conflicts in your code, you can disable it by using `generateBinaryFlagConstructor = false`. More details about generator configuration <a href="/https://github.com/Pierre2tm/neat/blob/main/doc/generator.md#padding-generator">here</a>.
+Note that the binary flag constructor `Padding(top | left | right | bottom)` use generated constants (top, left, right, bottom) to works. If it causing conflicts in your code, you can disable it by using `generateBinaryFlagConstructor = false`. More details about generator configuration <a href="https://github.com/Pierre2tm/neat/blob/main/doc/generator.md#padding-generator">here</a>.
 
 #### Example
 *dimensions.dart*
