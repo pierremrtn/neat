@@ -1,0 +1,18 @@
+name: neat
+description: "A collection of utility functions and code generators that helps making neat flutter code"
+version: 0.1.0
+repository: https://github.com/Pierre2tm/neat
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  neat_annotations: ^0.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:

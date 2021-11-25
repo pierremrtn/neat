@@ -1,0 +1,1 @@
+Annotations for <a href="https://pub.dev/packages/neat">Neat</a> code generator.<br/> This package does nothing without <a href="https://pub.dev/packages/neat">Neat</a>.
