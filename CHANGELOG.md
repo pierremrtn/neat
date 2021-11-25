@@ -1,3 +1,7 @@
+## 0.0.2
+fixes:
+- remove environnement flutter version constraint to enable null-safety badge on pub.dev 
+
 ## 0.0.1
 initial release
 
