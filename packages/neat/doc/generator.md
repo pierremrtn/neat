@@ -1,10 +1,28 @@
 # Neat Generator
 
 ## Usage
-To use Neat's code generator, you will need your typical build_runner/code-generator setup. Run the following command to add build_runner package to your dev dependencies:
+To use Neat's code generator, you will need your typical build_runner/code-generator setup. Run the following command to add neat_generator and build_runner package to your dev dependencies:
 ```
+flutter pub add neat_generator -dev
 flutter pub add build_runner -dev
 ```
+
+You will also need neat package to import generator's annotation. run the following command:
+```
+flutter pub add neat
+```
+
+These commands will add the following dependencies to your `pubspec.yaml` file:
+```yaml
+# pubspec.yaml
+dependencies:
+  neat:
+
+dev_dependencies:
+  neat_generator:
+  build_runner:
+```
+
 
 Note that like most code-generators, Neat will need you to both import the annotation (meta) and use the part keyword on the top of your files.
 You can import code generator's annotation with `import 'package:neat/generator.dart';`.
