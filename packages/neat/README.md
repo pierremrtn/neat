@@ -1,7 +1,7 @@
 # Neat 
 
-[![pub package](https://img.shields.io/pub/v/neat.svg?label=neat&color=blue)](https://pub.dev/packages/neat)<br/>
-[![pub package](https://img.shields.io/pub/v/neat_generator.svg?label=neat_generator&color=blue)](https://pub.dev/packages/neat_generator)<br/>
+[![pub package](https://img.shields.io/pub/v/neat.svg?label=neat&color=blue)](https://pub.dev/packages/neat)
+[![pub package](https://img.shields.io/pub/v/neat_generator.svg?label=neat_generator&color=blue)](https://pub.dev/packages/neat_generator)
 
 Welcome to Neat, a utility package that helps make clean Flutter code.
 
