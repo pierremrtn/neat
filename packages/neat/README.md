@@ -83,8 +83,8 @@ flutter pub add neat
 ```
 If you want to use the Neat's code generator, you will need neat_generator package and and a typical build_runner/code-generator setup. Run the following command to add neat_generator and build_runner packages to your dev dependencies:
 ```
-flutter pub add neat_generator -dev
-flutter pub add build_runner -dev
+flutter pub add neat_generator --dev
+flutter pub add build_runner --dev
 ```
 These commands will add the following dependencies to your `pubspec.yaml` file:
 ```yaml
@@ -261,7 +261,6 @@ As such, a file that wants to use Neat's code generator will start with:
 
 ```dart
 import 'package:neat/generator.dart';
-import 'package:flutter/widgets.dart';
 
 part 'my_file.nt.dart';
 ```
