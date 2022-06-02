@@ -38,14 +38,13 @@ class ClassLiteralsVisitor<T> {
     for (final field in c.fields) {
       final fieldName = field.displayName;
 
-      try {
-        final value =
-            ConstantReader(field.computeConstantValue()).literalValue as T;
-        if (filter.include(fieldName, value)) {
-          final widgetName = nameExtractor.extractWidgetName(fieldName);
-          yield generator(widgetName, value);
-        }
-      } catch (e) {}
+      final value =
+          ConstantReader(field.computeConstantValue()).literalValue as T;
+      if (filter.include(fieldName, value)) {
+        final widgetName = nameExtractor.extractWidgetName(fieldName);
+        yield generator(widgetName, value);
+      }
+      {}
     }
   }
 }
