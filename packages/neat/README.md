@@ -170,9 +170,11 @@ EdgeInsets.symmetric(horizontal: Dimensions.paddingMedium),
 EdgeInsets.symmetric(vertical: Dimensions.paddingMedium),
 
 EdgeInsets.only(right: Dimensions.paddingLarge),
+
 EdgeInsets.only(
-  top: Dimensions.paddingLarge,
   right: Dimensions.paddingLarge,
+  left: Dimensions.paddingLarge,
+  bottom: Dimensions.paddingLarge,
 ),
 ```
 
@@ -183,9 +185,10 @@ PaddingSmall(),
 PaddingMedium.horizontal(),
 PaddingMedium.vertical(),
 
-// only available if generateBinaryFlagConstructor is enabled
-PaddingLarge(right),
-PaddingLarge(top | right),
+PaddingLarge.right(),
+
+// only available if generateBinaryFlagConstructor is true
+PaddingLarge(right | left | bottom),
 ```
 
 ### Ignore lint warnings on generated files
