@@ -11,7 +11,7 @@ class GlobalGenerator extends GeneratorForAnnotation<NeatGenerate> {
   String generateForAnnotatedElement(
     Element element,
     ConstantReader annotation,
-    BuildStep step,
+    BuildStep buildStep,
   ) {
     final List<String> parts = [];
 
@@ -23,7 +23,7 @@ class GlobalGenerator extends GeneratorForAnnotation<NeatGenerate> {
         paddingGen.generateForAnnotatedElement(
           element,
           paddingAnnotation,
-          step,
+          buildStep,
         ),
       );
     }
@@ -36,7 +36,7 @@ class GlobalGenerator extends GeneratorForAnnotation<NeatGenerate> {
         spaceGen.generateForAnnotatedElement(
           element,
           spaceAnnotation,
-          step,
+          buildStep,
         ),
       );
     }

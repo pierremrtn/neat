@@ -1,3 +1,4 @@
+import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:analyzer/dart/element/element.dart';
@@ -30,7 +31,7 @@ class PaddingHelpersGenerator extends GeneratorForAnnotation<GeneratePadding> {
   String generateForAnnotatedElement(
     Element element,
     ConstantReader annotation,
-    _,
+    BuildStep buildStep,
   ) {
     final meta = annotation.toPaddingHelpersGeneratorAnnotation();
 
