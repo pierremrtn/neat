@@ -3,8 +3,8 @@
 ## Usage
 To use Neat's code generator, you will need your typical build_runner/code-generator setup. Run the following command to add neat_generator and build_runner package to your dev dependencies:
 ```
-flutter pub add neat_generator -dev
-flutter pub add build_runner -dev
+flutter pub add neat_generator --dev
+flutter pub add build_runner --dev
 ```
 
 You will also need neat package to import generator's annotation. run the following command:
