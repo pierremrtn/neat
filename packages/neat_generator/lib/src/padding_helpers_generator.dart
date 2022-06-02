@@ -70,7 +70,7 @@ class PaddingHelpersGenerator extends GeneratorForAnnotation<GeneratePadding> {
                     (p) => p
                       ..name = "padding"
                       ..type = const Reference("int")
-                      ..defaultTo = const Code("0"),
+                      ..defaultTo = const Code("left | right | top | bottom"),
                   ),
                 )
                 ..initializers.add(
@@ -83,12 +83,52 @@ class PaddingHelpersGenerator extends GeneratorForAnnotation<GeneratePadding> {
                   ),
                 )
                 ..constant = true,
+            )
+          else
+            Constructor(
+              (c) => c
+                ..initializers.add(
+                  Code("super.all($padding)"),
+                )
+                ..constant = true,
             ),
           Constructor(
             (c) => c
               ..name = "all"
               ..initializers.add(
                 Code("super.all($padding)"),
+              )
+              ..constant = true,
+          ),
+          Constructor(
+            (c) => c
+              ..name = "left"
+              ..initializers.add(
+                Code("super.only(left: $padding)"),
+              )
+              ..constant = true,
+          ),
+          Constructor(
+            (c) => c
+              ..name = "right"
+              ..initializers.add(
+                Code("super.only(right: $padding)"),
+              )
+              ..constant = true,
+          ),
+          Constructor(
+            (c) => c
+              ..name = "top"
+              ..initializers.add(
+                Code("super.only(top: $padding)"),
+              )
+              ..constant = true,
+          ),
+          Constructor(
+            (c) => c
+              ..name = "bottom"
+              ..initializers.add(
+                Code("super.only(bottom: $padding)"),
               )
               ..constant = true,
           ),
