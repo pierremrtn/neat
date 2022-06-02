@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-extension NeatText on BuildContext {
-  Text headline1(
+extension NeatMaterial3Texts on BuildContext {
+  Text displayLarge(
     String text, {
     Key? key,
     TextStyle? style,
@@ -16,7 +16,6 @@ extension NeatText on BuildContext {
     String? semanticsLabel,
     TextWidthBasis? textWidthBasis,
     TextHeightBehavior? textHeightBehavior,
-    FontWeight? weight,
   }) =>
       Text(
         text,
@@ -32,10 +31,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.headline1?.merge(style),
+        style: Theme.of(this).textTheme.displayLarge?.merge(style),
       );
 
-  Text headline2(
+  Text displayMedium(
     String text, {
     Key? key,
     TextStyle? style,
@@ -65,10 +64,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.headline2?.merge(style),
+        style: Theme.of(this).textTheme.displayMedium?.merge(style),
       );
 
-  Text headline3(
+  Text displaySmall(
     String text, {
     Key? key,
     TextStyle? style,
@@ -98,10 +97,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.headline3?.merge(style),
+        style: Theme.of(this).textTheme.displaySmall?.merge(style),
       );
 
-  Text headline4(
+  Text headlineLarge(
     String text, {
     Key? key,
     TextStyle? style,
@@ -131,10 +130,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.headline4?.merge(style),
+        style: Theme.of(this).textTheme.headlineLarge?.merge(style),
       );
 
-  Text headline5(
+  Text headlineMedium(
     String text, {
     Key? key,
     TextStyle? style,
@@ -164,10 +163,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.headline5?.merge(style),
+        style: Theme.of(this).textTheme.headlineMedium?.merge(style),
       );
 
-  Text headline6(
+  Text headlineSmall(
     String text, {
     Key? key,
     TextStyle? style,
@@ -197,10 +196,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.headline6?.merge(style),
+        style: Theme.of(this).textTheme.headlineSmall?.merge(style),
       );
 
-  Text subtitle1(
+  Text titleLarge(
     String text, {
     Key? key,
     TextStyle? style,
@@ -230,10 +229,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.subtitle1?.merge(style),
+        style: Theme.of(this).textTheme.titleLarge?.merge(style),
       );
 
-  Text subtitle2(
+  Text titleMedium(
     String text, {
     Key? key,
     TextStyle? style,
@@ -263,10 +262,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.subtitle2?.merge(style),
+        style: Theme.of(this).textTheme.titleMedium?.merge(style),
       );
 
-  Text bodyText1(
+  Text titleSmall(
     String text, {
     Key? key,
     TextStyle? style,
@@ -296,10 +295,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.bodyText1?.merge(style),
+        style: Theme.of(this).textTheme.titleSmall?.merge(style),
       );
 
-  Text bodyText2(
+  Text bodyLarge(
     String text, {
     Key? key,
     TextStyle? style,
@@ -329,10 +328,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.bodyText2?.merge(style),
+        style: Theme.of(this).textTheme.bodyLarge?.merge(style),
       );
 
-  Text caption(
+  Text bodyMedium(
     String text, {
     Key? key,
     TextStyle? style,
@@ -362,10 +361,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.caption?.merge(style),
+        style: Theme.of(this).textTheme.bodyMedium?.merge(style),
       );
 
-  Text overline(
+  Text bodySmall(
     String text, {
     Key? key,
     TextStyle? style,
@@ -395,10 +394,10 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.overline?.merge(style),
+        style: Theme.of(this).textTheme.bodySmall?.merge(style),
       );
 
-  Text buttonText(
+  Text labelLarge(
     String text, {
     Key? key,
     TextStyle? style,
@@ -428,6 +427,72 @@ extension NeatText on BuildContext {
         semanticsLabel: semanticsLabel,
         textWidthBasis: textWidthBasis,
         textHeightBehavior: textHeightBehavior,
-        style: Theme.of(this).textTheme.button?.merge(style),
+        style: Theme.of(this).textTheme.labelLarge?.merge(style),
+      );
+
+  Text labelMedium(
+    String text, {
+    Key? key,
+    TextStyle? style,
+    StrutStyle? strutStyle,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    Locale? locale,
+    bool? softWrap,
+    TextOverflow? overflow,
+    double? textScaleFactor,
+    int? maxLines,
+    String? semanticsLabel,
+    TextWidthBasis? textWidthBasis,
+    TextHeightBehavior? textHeightBehavior,
+  }) =>
+      Text(
+        text,
+        key: key,
+        strutStyle: strutStyle,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        locale: locale,
+        softWrap: softWrap,
+        overflow: overflow,
+        textScaleFactor: textScaleFactor,
+        maxLines: maxLines,
+        semanticsLabel: semanticsLabel,
+        textWidthBasis: textWidthBasis,
+        textHeightBehavior: textHeightBehavior,
+        style: Theme.of(this).textTheme.labelMedium?.merge(style),
+      );
+
+  Text labelSmall(
+    String text, {
+    Key? key,
+    TextStyle? style,
+    StrutStyle? strutStyle,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    Locale? locale,
+    bool? softWrap,
+    TextOverflow? overflow,
+    double? textScaleFactor,
+    int? maxLines,
+    String? semanticsLabel,
+    TextWidthBasis? textWidthBasis,
+    TextHeightBehavior? textHeightBehavior,
+  }) =>
+      Text(
+        text,
+        key: key,
+        strutStyle: strutStyle,
+        textAlign: textAlign,
+        textDirection: textDirection,
+        locale: locale,
+        softWrap: softWrap,
+        overflow: overflow,
+        textScaleFactor: textScaleFactor,
+        maxLines: maxLines,
+        semanticsLabel: semanticsLabel,
+        textWidthBasis: textWidthBasis,
+        textHeightBehavior: textHeightBehavior,
+        style: Theme.of(this).textTheme.labelSmall?.merge(style),
       );
 }
