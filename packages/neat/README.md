@@ -4,13 +4,13 @@ Neat is a collection of small opinionated utilities designed to helps writing sh
 
 # Summary
 
-* <a href="buildcontext-extensions">BuildContext extensions</a>
-  * <a href="text-helpers">Text helpers</a>
-  * <a href="theme-accessors">Theme accessors</a>
-* <a href="generated-widgets-and-helpers">Generated widget and helpers</a>
-  * <a href="setup-the-generator">Setup the generator</a>
-  * <a href="space-widgets">Space widgets</a>
-  * <a href="padding-helpers">Padding helpers</a>
+* <a href="#buildcontext-extensions">BuildContext extensions</a>
+  * <a href="#text-helpers">Text helpers</a>
+  * <a href="#theme-accessors">Theme accessors</a>
+* <a href="#generated-widgets-and-helpers">Generated widget and helpers</a>
+  * <a href="#setup-the-generator">Setup the generator</a>
+  * <a href="#space-widgets">Space widgets</a>
+  * <a href="#padding-helpers">Padding helpers</a>
 
 ## BuildContext extensions
 
