@@ -1,3 +1,17 @@
+## 0.2.0
+* feature: Added material 3 text helpers
+* **[Breaking change]** padding generator default constructor now default to EdgeInsets.all(padding) instead of EdgeInsets.zero
+* feature: New padding helper constructors:
+  * Padding.left();
+  * Padding.top();
+  * Padding.right();
+  * Padding.bottom();
+* fix: Default padding constructor is now generated even if generateBinaryFlagConstructor is false.
+* fix: fix dart style mistakes
+* doc: Readme has been re-written
+* doc: add code documentation
+* doc: add example
+
 ## 0.1.1
 Remove <br/> in README.md
 
