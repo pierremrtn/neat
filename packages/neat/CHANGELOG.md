@@ -1,3 +1,6 @@
+## 0.2.1
+* fix readme broken links
+
 ## 0.2.0
 * feature: Added material 3 text helpers
 * **[Breaking change]** padding generator default constructor now default to EdgeInsets.all(padding) instead of EdgeInsets.zero
