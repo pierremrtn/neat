@@ -2,6 +2,16 @@
 
 Neat is a collection of small opinionated utilities designed to helps writing short and clean Flutter code.
 
+# Summary
+
+* <a href="BuildContext extensions">BuildContext extensions</a>
+  * <a href="Text helpers">Text helpers</a>
+  * <a href="Theme accessors">Theme accessors</a>
+* <a href="Generated widget and helpers">Generated widget and helpers</a>
+  * <a href="Setup the generator">Setup the generator</a>
+  * <a href="Space widgets">Space widgets</a>
+  * <a href="Padding helpers">Padding helpers</a>
+
 ## BuildContext extensions
 
 Neat provides a set of `BuildContext` extensions designed to reduce the amount of boilerplate code needed to achieve basic tasks in Flutter.
@@ -77,7 +87,7 @@ context.buttonText('button');
 context.overline('overline');
 ```
 
-### Texts theme override
+### Text's theme override
 Neat also provides a simple way to override the base text theme's `TextStyle`.
 Any `TextStyle` object passed through the style property of a text helper will be automatically merged with the corresponding text theme's base style using `TextStyle.merge` method.
 
@@ -99,7 +109,7 @@ context.titleMedium(
 );
 ```
 
-### Theme access
+### Theme accessors
 
 A collection of helpers to facilitate the theme access.
 
@@ -117,17 +127,51 @@ context.textTheme;
 context.colorScheme;
 ```
 
-## Generated widgets
+## Generated widgets and helpers
 
 A collection of code generators designed to generate project-specific convenience widgets and helpers.
 
-> 🚨 Make sure you have correctly installed neat_annotation, neat_generator, and build_runner to use this part of the package.
+> 🚨 Make sure you have correctly installed neat_generator and build_runner as dev dependencies to use this part of the package.
 
-> 🔧 This part of the package is optional. If you don't like it, just don't install neat_annotation and neat_generator.
+> 🔧 This part of the package is optional. If you don't like it, just don't install neat_generator.
+
+### Setup the generator
+
+If you want to use the Neat's code generator, you will need neat_generator package and and a typical build_runner/code-generator setup. Run the following command to add neat_generator and build_runner packages to your dev dependencies:
+
+```bash
+flutter pub add neat_generator --dev
+flutter pub add build_runner --dev
+```
+These commands will add the following dependencies to your pubspec.yaml file:
+
+```yaml
+dependencies:
+  neat:
+
+dev_dependencies:
+  neat_generator:
+  build_runner:
+```
+
+To run neat's generator, use the following command. You can find more infos on [build_runner's pub page](https://pub.dev/packages/build_runner).
+```dart
+flutter pub run build_runner build --delete-conflicting-outputs
+```
+
+#### Ignore lint warnings on generated files
+Depending on your lint options, Neat Generator may cause your linter to report warnings.
+
+The solution to this problem is to tell the linter to ignore generated files, by modifying your analysis_options.yaml:
+```
+analyzer:
+  exclude:
+    - "**/*.nt.dart"
+```
 
 ## Dimensions class based generated widgets
 
-A good practice is to keep all constants inside a dedicated data class so all your widget share same values:
+A good practice is to keep all constants inside a dedicated data class so all your widget can share same values:
 ```dart
 class Dimensions {
   // Blank Spaces
@@ -188,7 +232,7 @@ const SpaceMedium.w();
 const SpaceLarge.h();
 ```
 
-### Padding helpers
+## Padding helpers
 Generate a set of classes that inherit from `EdgeInsets` with pre-filled padding values, based on the data class you've provided.
 
 By default, the space widget generator will use generate a `Padding` widget for each constant of the class starting with `padding`. You can customize this behavior by using the `@NeatGenerate()` annotation. See [generator options](https://github.com/Pierre2tm/neat/blob/main/packages/neat/doc/generator.md) for advanced usage.
@@ -220,14 +264,4 @@ PaddingLarge.right(),
 
 // only available if generateBinaryFlagConstructor is true
 PaddingLarge(right | left | bottom),
-```
-
-### Ignore lint warnings on generated files
-Depending on your lint options, Neat Generator may cause your linter to report warnings.
-
-The solution to this problem is to tell the linter to ignore generated files, by modifying your analysis_options.yaml:
-```
-analyzer:
-  exclude:
-    - "**/*.nt.dart"
 ```
