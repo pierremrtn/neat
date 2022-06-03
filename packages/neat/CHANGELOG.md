@@ -1,3 +1,6 @@
+## 0.2.4
+* doc fix: better sized title
+
 ## 0.2.3
 * doc fix: changelog version number issue
 
