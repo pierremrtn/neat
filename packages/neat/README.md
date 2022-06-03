@@ -4,7 +4,7 @@ Neat is a collection of small opinionated utilities designed to helps writing sh
 
 ## BuildContext extensions
 
-Neat provides a set of `BuildContext` extension designed to reduces the amount of boilerplate code needed to achieve basic tasks in Flutter.
+Neat provides a set of `BuildContext` extensions designed to reduce the amount of boilerplate code needed to achieve basic tasks in Flutter.
 
 ### Text helpers
 
@@ -47,7 +47,7 @@ In addition, Neat provides a text helper method for each text theme style:
 ```
 
 ### Texts theme override
-Neat also provide an simple way to override the base text theme's `TextStyle`.
+Neat also provides a simple way to override the base text theme's `TextStyle`.
 Any `TextStyle` object passed through the style property of a text helper will be automatically merged with the corresponding text theme's base style thanks to `TextStyle.merge` method.
 
 **before**
@@ -88,9 +88,9 @@ context.colorScheme;
 
 ## Generated widgets
 
-A collection of code generator designed to generate project's specific convenience widgets and helpers.
+A collection of code generators designed to generate project-specific convenience widgets and helpers.
 
-> 🚨 Make sure you have correctly installed neat_annotation, neat_generator and build_runner to use this part of the package.
+> 🚨 Make sure you have correctly installed neat_annotation, neat_generator, and build_runner to use this part of the package.
 
 > 🔧 This part of the package is optional. If you don't like it, just don't install neat_annotation and neat_generator.
 
@@ -121,8 +121,8 @@ Container(
   child: ...
 )
 ```
-Neat provide a set of generator that can parse such data classes and generate useful widget with pre-filled values. To use a generator,
-annotate you data class with `@Neat.generate` and run the `flutter pub run build_runner build`.
+Neat provides a set of generators that can parse such data classes and generate useful widgets with pre-filled values. To use a generator,
+annotate your data class with `@Neat.generate` and run the `flutter pub run build_runner build`.
 
 _dimensions.dart_
 ```dart
@@ -139,9 +139,9 @@ class Dimensions {
 ```
 
 ### Space widgets
-Generate a set of `SizedBox` with pre-filled width and height, based on the data class you've provide.
+Generate a set of `SizedBox` with pre-filled width and height, based on the data class you've provided.
 
-By default the space widget generator will use generate a `Space` widget for each constant of the class starting with `space`. You can customize this behavior by the using the `@NeatGenerate()` annotation. See [generator options](https://github.com/Pierre2tm/neat/blob/main/packages/neat/doc/generator.md) for advanced usage.
+By default, the space widget generator will use generate a `Space` widget for each constant of the class starting with `space`. You can customize this behavior by using the `@NeatGenerate()` annotation. See [generator options](https://github.com/Pierre2tm/neat/blob/main/packages/neat/doc/generator.md) for advanced usage.
 
 **before**
 ```dart
@@ -158,9 +158,9 @@ const SpaceLarge.h();
 ```
 
 ### Padding helpers
-Generate a set of class that inherit from `EdgeInsets` with pre-filled padding values, based on the data class you've provide.
+Generate a set of classes that inherit from `EdgeInsets` with pre-filled padding values, based on the data class you've provided.
 
-By default the space widget generator will use generate a `Padding` widget for each constant of the class starting with `padding`. You can customize this behavior by the using the `@NeatGenerate()` annotation. See [generator options](https://github.com/Pierre2tm/neat/blob/main/packages/neat/doc/generator.md) for advanced usage.
+By default, the space widget generator will use generate a `Padding` widget for each constant of the class starting with `padding`. You can customize this behavior by using the `@NeatGenerate()` annotation. See [generator options](https://github.com/Pierre2tm/neat/blob/main/packages/neat/doc/generator.md) for advanced usage.
 
 **before**
 ```dart
