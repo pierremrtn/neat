@@ -1,6 +1,5 @@
-## 0.2.1
+## 0.2.2
 * fix: ran flutter format on neat.dart
-
 
 ## 0.2.1
 * fix: readme summary broken links
