@@ -1,6 +1,6 @@
 # Neat.
 
-Neat is a collection of small opinionated utilities designed to helps writing short and clean flutter code.
+Neat is a collection of small opinionated utilities designed to helps writing short and clean Flutter code.
 
 ## BuildContext extensions
 
@@ -8,7 +8,7 @@ Neat provides a set of `BuildContext` extensions designed to reduce the amount o
 
 ### Text helpers
 
-A collection of methods to create Text widgets with pre-filled corresponding style from the context's textTheme.
+A collection of methods to create Text widgets with pre-filled corresponding style from the context's `textTheme`.
 
 **before**
 ```dart
@@ -22,7 +22,7 @@ Text(
 context.titleMedium("Clean code is simple and direct.");
 ```
 
-Theses helpers give you access to every `Text` properties so you can use them -like regular text widgets.
+Theses helpers give you access to every `Text` properties so you can use them like regular text widgets.
 ```dart
 context.titleMedium(
   String text, {
@@ -42,13 +42,44 @@ context.titleMedium(
 });
 ```
 
-In addition, Neat provides a text helper method for each text theme style:
+Neat provides a text helper method for each text theme style:
 ```dart
+// Material 3
+context.displayLarge('displayLarge');
+context.displayMedium('displayMedium');
+context.displaySmall('displaySmall');
+context.headlineLarge('headlineLarge');
+context.headlineMedium('headlineMedium');
+context.headlineSmall('headlineSmall');
+context.titleLarge('titleLarge');
+context.titleMedium('titleMedium');
+context.titleSmall('titleSmall');
+context.bodyLarge('bodyLarge');
+context.bodyMedium('bodyMedium');
+context.bodySmall('bodySmall');
+context.labelLarge('labelLarge');
+context.labelMedium('labelMedium');
+context.labelSmall('labelSmall');
+
+// Material 2
+context.headline1('headline1');
+context.headline2('headline2');
+context.headline3('headline3');
+context.headline4('headline4');
+context.headline5('headline5');
+context.headline6('headline6');
+context.subtitle1('subtitle1');
+context.subtitle2('subtitle2');
+context.bodyText1('bodyText1');
+context.bodyText2('bodyText2');
+context.caption('caption');
+context.buttonText('button');
+context.overline('overline');
 ```
 
 ### Texts theme override
 Neat also provides a simple way to override the base text theme's `TextStyle`.
-Any `TextStyle` object passed through the style property of a text helper will be automatically merged with the corresponding text theme's base style thanks to `TextStyle.merge` method.
+Any `TextStyle` object passed through the style property of a text helper will be automatically merged with the corresponding text theme's base style using `TextStyle.merge` method.
 
 **before**
 ```dart
@@ -94,7 +125,7 @@ A collection of code generators designed to generate project-specific convenienc
 
 > 🔧 This part of the package is optional. If you don't like it, just don't install neat_annotation and neat_generator.
 
-## Dimensions based generated widgets
+## Dimensions class based generated widgets
 
 A good practice is to keep all constants inside a dedicated data class so all your widget share same values:
 ```dart
