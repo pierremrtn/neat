@@ -1,5 +1,9 @@
 ## 0.2.1
-* fix readme broken links
+* fix: ran flutter format on neat.dart
+
+
+## 0.2.1
+* fix: readme summary broken links
 
 ## 0.2.0
 * feature: Added material 3 text helpers
