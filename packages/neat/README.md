@@ -12,11 +12,11 @@ Neat is a collection of small opinionated utilities designed to helps writing sh
   * <a href="#space-widgets">Space widgets</a>
   * <a href="#padding-helpers">Padding helpers</a>
 
-## BuildContext extensions
+# BuildContext extensions
 
 Neat provides a set of `BuildContext` extensions designed to reduce the amount of boilerplate code needed to achieve basic tasks in Flutter.
 
-### Text helpers
+## Text helpers
 
 A collection of methods to create Text widgets with pre-filled corresponding style from the context's `textTheme`.
 
@@ -109,7 +109,7 @@ context.titleMedium(
 );
 ```
 
-### Theme accessors
+## Theme accessors
 
 A collection of helpers to facilitate the theme access.
 
@@ -127,7 +127,7 @@ context.textTheme;
 context.colorScheme;
 ```
 
-## Generated widgets and helpers
+# Generated widgets and helpers
 
 A collection of code generators designed to generate project-specific convenience widgets and helpers.
 
@@ -135,7 +135,7 @@ A collection of code generators designed to generate project-specific convenienc
 
 > 🔧 This part of the package is optional. If you don't like it, just don't install neat_generator.
 
-### Setup the generator
+## Setup the generator
 
 If you want to use the Neat's code generator, you will need neat_generator package and and a typical build_runner/code-generator setup. Run the following command to add neat_generator and build_runner packages to your dev dependencies:
 
@@ -159,7 +159,7 @@ To run neat's generator, use the following command. You can find more infos on [
 flutter pub run build_runner build --delete-conflicting-outputs
 ```
 
-#### Ignore lint warnings on generated files
+### Ignore lint warnings on generated files
 Depending on your lint options, Neat Generator may cause your linter to report warnings.
 
 The solution to this problem is to tell the linter to ignore generated files, by modifying your analysis_options.yaml:
@@ -169,7 +169,7 @@ analyzer:
     - "**/*.nt.dart"
 ```
 
-## Dimensions class based generated widgets
+# Dimensions class based generated widgets
 
 A good practice is to keep all constants inside a dedicated data class so all your widget can share same values:
 ```dart
@@ -213,7 +213,7 @@ class Dimensions {
 }
 ```
 
-### Space widgets
+## Space widgets
 Generate a set of `SizedBox` with pre-filled width and height, based on the data class you've provided.
 
 By default, the space widget generator will use generate a `Space` widget for each constant of the class starting with `space`. You can customize this behavior by using the `@NeatGenerate()` annotation. See [generator options](https://github.com/Pierre2tm/neat/blob/main/packages/neat/doc/generator.md) for advanced usage.
