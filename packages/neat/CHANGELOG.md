@@ -1,8 +1,11 @@
+## 0.2.3
+* doc fix: changelog version number issue
+
 ## 0.2.2
-* fix: ran flutter format on neat.dart
+* doc fix: ran flutter format on neat.dart
 
 ## 0.2.1
-* fix: readme summary broken links
+* doc fix: readme summary broken links
 
 ## 0.2.0
 * feature: Added material 3 text helpers
